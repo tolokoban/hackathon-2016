@@ -1,0 +1,20 @@
+<h1>Registration system</h1>
+
+ksjdkjswdbkjsdjhs
+
+<p>To register, you need to <a href="#/book/how-to-flash">flash the QRCode</a> you should have received by email.</p>
+
+<article>
+    <a class="tp4-button wide" href="/book/new">This is my first registration!</a>
+</article>
+<article>
+    <a class="tp4-button wide" href="/book/lost">I've lost my QRCode, sorry...</a>
+</article>
+
+<br/>
+<hr/>
+
+<p>Here is what a QRCode looks like:</p>
+<center>
+    <x-widget name="qrcode" id="qrcode"></x-widget>
+</center>

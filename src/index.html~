@@ -1,0 +1,5 @@
+<x-html app="main">
+    <x-central-box width="480" height="640">
+        
+    </x-central-box>
+</x-html>

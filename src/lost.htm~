@@ -1,0 +1,14 @@
+<h1>Lost your QRCode?</h1>
+
+<p>We can send you back to your email address:</p>
+
+<x-widget name="tp4.input" id="email" class="wide">{label: 'Email address'}</x-widget>
+
+<hr/>
+
+<x-row>
+    <a href="#/book/main" class="tp4-button warning">Cancel</a>
+    <a href="#/book/lost-ok" class="tp4-button">OK</a>
+</x-row>
+
+    

@@ -1,0 +1,82 @@
+a.tp4-button {
+    position: relative;
+    display: inline-block;
+    line-height: 2em;
+    padding: 0 1em;
+    background: #9cd;
+    color: #000;
+    text-decoration: none;
+    border-radius: 1em;
+    text-shadow: none;
+    cursor: pointer;
+    margin: 1px 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 90%;
+    box-shadow: 3px 3px rgba(127,127,127,.5);
+    min-width: 64px;
+    transform: translate(0,0);
+    transition: all .2s;
+    text-align: center;
+}
+
+a.tp4-button.wide {
+    display: block;
+}
+
+a.tp4-button.small {
+    font-size: 70%;
+    padding: 0 .5em;
+    margin: 0;
+    font-variant: small-caps;
+    min-width: 2em;
+}
+
+a.tp4-button.press {
+    box-shadow: 0px 0px rgba(127,127,127,.5);
+    transform: translate(2px,2px);
+    transition: all .2s;
+}
+
+a.tp4-button[disabled=yes]:hover,
+a.tp4-button[disabled=yes] {
+    text-decoration: none;
+    cursor: default;
+    background: #888;
+    color: #ccc;
+    text-shadow: none;
+    box-shadow: none;
+    font-style: italic;
+}
+
+a.tp4-button.shadow {
+    background-color: #69A;
+}
+
+a.tp4-button.warning {
+    background-color: #c50;
+    color: #fff;
+}
+
+a.tp4-button.green {
+    background-color: #9dc;
+}
+
+a.tp4-button.simple {
+    color: #69b;
+    border-radius: none;
+    background: none;
+    text-shadow: none;
+    box-shadow: none;
+    font-size: 100%;
+}
+
+a.tp4-button.simple:hover {
+    text-decoration: underline;
+}
+
+a.tp4-button:focus {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
