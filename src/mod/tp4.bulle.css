@@ -1,0 +1,98 @@
+div.tp4-bulle-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    background-color: rgba(0,0,0,.7);
+    z-index: 100001;
+}
+
+div.tp4-bulle-container a.tp4-button.simple {
+    color: #579;
+}
+
+div.tp4-bulle {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    transition: 1.5s opacity;
+    overflow: visible;
+}
+
+div.tp4-bulle > div.frame {
+    width: 240px;
+    position: absolute;
+    left: 0;
+}
+
+div.tp4-bulle.top > div.frame {
+    top: 0;
+}
+
+div.tp4-bulle.bottom > div.frame {
+    bottom: 0;
+}
+
+
+div.tp4-bulle.show {
+    opacity: 1;
+    transition: 1.5s opacity;
+}
+
+div.tp4-bulle div.svg {
+    position: relative;
+    width: 240px;
+    height: 40px;
+    background-repeat:   no-repeat;
+    background-position: top left;
+    background-size:     240px 40px;
+}
+
+div.tp4-bulle.bottom div.svg {
+    background-position: bottom left;
+}
+
+div.tp4-bulle.left div.svg {
+    background-image:    url(tp4.bulle/tl.svg);
+}
+
+div.tp4-bulle.right div.svg {
+    background-image:    url(tp4.bulle/tr.svg);
+}
+
+div.tp4-bulle.left.bottom div.svg {
+    background-image:    url(tp4.bulle/bl.svg);
+}
+
+div.tp4-bulle.right.bottom div.svg {
+    background-image:    url(tp4.bulle/br.svg);
+}
+
+div.tp4-bulle div.content {
+    position: relative;
+    margin: 0;
+    width: 220px;
+    padding: 10px;
+    border-top: none;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    background-color: #eee;
+    color: #333;
+    font-size: 10pt;
+    font-family: sans-serif;
+}
+
+div.tp4-bulle.bottom div.content {
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: none;
+}
+
+div.tp4-bulle.left div.content {
+    margin-left: 20px;
+}

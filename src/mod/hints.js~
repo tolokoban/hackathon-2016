@@ -1,0 +1,8 @@
+module.exports = {
+    reminder1 {
+        question: "You have an appointement with your GP <b>tomorrow</b>.",
+        answers: [
+            
+        ]
+    }
+};

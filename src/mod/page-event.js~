@@ -1,0 +1,7 @@
+var $ = require("dom");
+var HintManager = require("hint-manager");
+
+exports.activate = function() {
+    var container = $.get( '#event' );
+    HintManager.appendTo( 'start', container );    
+};

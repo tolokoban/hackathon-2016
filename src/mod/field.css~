@@ -1,0 +1,15 @@
+div.field {
+    display: table;
+    width: 100%;
+}
+
+div.field > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+}
+
+div.field > div:last-child {
+    text-align: right;
+}
+

@@ -36,6 +36,8 @@ function execService( $inputs ) {
 
 
 function execNew( $args ) {
+error_log( "NEW" );
+error_log( json_encode( $args ) );
     $id = md5( $args['email'] );
     $sys = new SystemData( 'pri' );
     $mail = new Mail();
@@ -50,12 +52,15 @@ function execNew( $args ) {
                    'name' => 'HUG',
                    'address' => 'Hôpital Universitaire de Genève, Rue Gabrielle-Perret-Gentil 4, 1205 Genève' )
         );
+error_log( "A" );
         $sys->saveJSON( $id, $args );
+error_log( "B" );
         $mail->send( $args['email'], "[OHGOHRT3] New registration",
                      "<p>Dear " . $args['firstname'] . " " . $args['lastname'] . ",</p>"
                    . "<p>You registred successfully and here is your QRCode:</p>"
                    . "<a href='http://tolokoban.org/hackathon/?$id'>"
                    . "<img src='http://tolokoban.org/hackathon/css/qrcode/qrcode.php?id=$id'></a>" );
+error_log( "C" );
         return 1;
     } else {
         $mail->send( $args['email'], "[OHGOHRT3] New registration",

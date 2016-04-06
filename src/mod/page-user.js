@@ -3,6 +3,7 @@ var WS = require("tfw.web-service");
 var Tpl = require("x-template");
 var Wdg = require("x-widget");
 var Gravatar = require("wdg.gravatar");
+var HintManager = require("hint-manager");
 
 
 exports.activate = function( id ) {
@@ -12,34 +13,26 @@ exports.activate = function( id ) {
     Wdg.onWidgetCreation( 'qrcode2', function( wdg ) {
         wdg.id = id;
     });
+    $.get( '#user-name' ).textContent = "Unpacking your data...";
     WS.get( 'registration', ['get', id] ).then(
         function( data ) {
             APP.data = data;
+            console.info("[page-user] id=...", id);
+            console.info("[page-user] data=...", data);
             if( !data ) {
                 window.location = "?#/book/main";
                 return;
             }
-            console.info("[page-user] data=...", data);
+            $.get( '#user-name' ).textContent = data.firstname + " " + data.lastname.toUpperCase();
             $.clear( container );
             var children = Tpl.appendTo( "user.data", container );
-            console.info("[page-user] children=...", children);
             children.img.src = Gravatar.url( id, 128 );
-            children.firstname.textContent = data.firstname;
-            children.lastname.textContent = data.lastname;
-            var planning = children.planning;
-            $.clear( planning );
-            if( Array.isArray( data.planning ) ) {
-                data.planning.forEach(function (visit) {
-                    var children = Tpl.appendTo( "user.visit", planning );
-                    children.visitName.textContent = visit.name;
-                    children.visitDate.textContent = visit.date;
-                    children.visitName.setAttribute(
-                        'href',
-                        "https://www.google.ch/maps/search/"
-                        + ("" + visit.address).replace( /[ ]/g, '+' )
-                    );
-                });
 
+            var p;
+            for( var i=1 ; i<3 ; i++ ) {
+                p = $.tag( 'p' );
+                children.planning.appendChild( p );
+                HintManager.appendTo( 'reminder' + i, p );
             }
         }
     );

@@ -1,23 +1,26 @@
-<h1>Your data</h1>
+<h1 id="user-name"></h1>
 
 <div id="user-container">
     <x-template name="user.wait">
         <x-widget name="tp4.wait" $caption="Loading..." $color="#9cd" />
     </x-template>
     <x-template name="user.data">
-        <img $tpl="img" width="128" height="128" style="float:left; margin:0 1em 1em 0"/>
-        <p $tpl="firstname">Firstname</p>
-        <p $tpl="lastname">Lastname</p>
-        <a href="#/book/user-edit" class="tp4-button">Edit</a>
+        <x-row dir="H" fullwidth>
+            <img $tpl="img" width="128" height="128"/>
+            <p>
+                <a href="#/book/user-edit" class="wide tp4-button">Edit your bio</a>
+                <a href="#/book/event" class="wide tp4-button">New Event</a>
+                <a href="#/book/registration" class="wide tp4-button">Registration</a>
+            </p>
+        </x-row>
         <hr/>
-        <p><b>Planning</b></p>
-        <ul $tpl="planning"></ul>
+        <div $tpl="planning" />
         <hr/>
-        <p>Here is your QRCode, you'd better show it at every visit:</p>
+        <p>Here is your QRCode. Just flash it to get your <b>wallet</b> on your phone or tablet.</p>
         <center>
             <x-widget name="qrcode" id="qrcode2"></x-widget>
         </center>
-        
+
     </x-template>
     <x-template name="user.visit">
         <li>
@@ -25,4 +28,3 @@
         </li>
     </x-template>
 </div>
-

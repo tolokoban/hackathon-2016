@@ -1,0 +1,2 @@
+require("page-lost",function(e,t){var i=require("dom"),n=require("tfw.web-service"),o=require("x-widget"),r=(require("tfw.storage").local,document.getElementById("btnLostRegistration"));i.on(r,function(){APP.waitOn();var e=o.getById("lost-email").val();n.get("registration",["new",{email:e}]).then(function(e){APP.waitOff(),window.location="#/book/registration"+e},function(e){APP.waitOff()})})});
+//# sourceMappingURL=page-lost.js.map

@@ -8,17 +8,22 @@ require("tp4.button");
 require("page-new");
 require("page-lost");
 
+var $ = require("dom");
 var Wdg = require("x-widget");
 var Md5 = require("md5");
 var Storage = require("tfw.storage").local;
 var PageUser = require("page-user");
+var PageEvent = require("page-event");
 var PageUserEdit = require("page-user-edit");
 
 
 var querystring = window.location.search.substr( 1 );
 if( Md5.isValid( querystring ) ) {
     exports.id = querystring;
-    window.location = "#/book/user";
+    $.on( document.getElementById( 'lockscreen' ), function() {
+        window.location = "?" + querystring + "#/book/user";
+    });
+    window.location.hash = "/book/lockscreen";
 }
 
 exports.onActivateMain = function() {
@@ -30,6 +35,11 @@ exports.onActivateMain = function() {
 
 exports.onActivateUser = function() {
     PageUser.activate( APP.id );
+};
+
+
+exports.onActivateEvent = function() {
+    PageEvent.activate( APP.id );
 };
 
 

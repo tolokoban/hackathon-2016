@@ -1,0 +1,56 @@
+div.tp4-input-date {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    min-width: 200px;
+}
+
+div.tp4-input-date > div {
+    width: 100%;
+}
+
+div.tp4-input-date > div.body {
+    display: table;
+}
+
+div.tp4-input-date > div.body > div {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+}
+
+div.tp4-input-date > div.body > div.space {
+    width: 1em;
+    min-width: 1em;
+}
+
+div.tp4-input-date > div.head {
+    background-color: #468;
+    border-radius: 12px 12px 0 0;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 10px;
+    line-height: 16px;
+    height: 16px;
+    padding: 0 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+div.tp4-input-date > div.foot {
+    background-color: #333;
+    border-radius: 0 0 12px 12px;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 10px;
+    line-height: 16px;
+    height: 16px;
+    padding: 0 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 3px;
+}

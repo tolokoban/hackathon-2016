@@ -1,0 +1,4 @@
+exports.get = function( name ) {
+    var data = APP.data || {};
+
+};

@@ -145,7 +145,7 @@ class SystemData {
     if (!file_exists($this->datadir)) {
       @mkdir($this->datadir, 0777, true);
     }
-    @file_put_contents($this->datadir.$filename, json_encode($data));
+    file_put_contents($this->datadir.$filename, json_encode($data));
   }
 
   function loadText($filename) {

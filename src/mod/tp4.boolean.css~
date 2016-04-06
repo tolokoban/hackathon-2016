@@ -1,0 +1,84 @@
+div.tp4-boolean {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+div.tp4-boolean.label {
+    background-color: #468;
+    border-radius: 12px;
+    margin: 2px 6px;
+    text-align: center;
+    min-width: 62px;
+}
+
+div.tp4-boolean.label > div.label {
+    margin: 0;
+    padding: 0 12px;
+    font-size: 10px;
+    font-family: sans-serif;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #fff;
+    width: 100%;
+}
+
+
+div.tp4-boolean-child {
+    position: relative;
+    display: inline-block;
+    margin: 2px 6px;
+    line-height: 1.2em;
+    height: 1.2em;
+    width: 42px;
+    overflow: hidden;
+    border: 1px solid #000;
+    /*box-shadow: 0 0 1px 1px #9CD;*/
+    cursor: pointer;
+    padding: 0;
+    border-radius: 12px;
+}
+
+div.tp4-boolean.label > div.tp4-boolean-child {
+    margin: 0;
+}
+
+div.tp4-boolean-child > div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    line-height: 1.2em;
+    height: 1.2em;
+    margin: 0;
+    color: #fff;
+    font-size: .8em;
+    font-weight: 700;
+    transition: .2s transform;
+    text-align: center;
+}
+
+div.tp4-boolean-child > div:first-child {
+    background-color: red;
+    transition: .2s transform;
+    transform: translateX(0);
+}
+
+div.tp4-boolean-child > div:last-child {
+    background-color: #0f0;
+    transition: .2s transform;
+    transform: translateX(100%);
+}
+
+div.tp4-boolean-child.yes > div:first-child {
+    transition: .2s transform;
+    transform: translateX(-100%);
+}
+
+div.tp4-boolean-child.yes > div:last-child {
+    color: #000;
+    transition: .2s transform;
+    transform: translateX(0);
+}

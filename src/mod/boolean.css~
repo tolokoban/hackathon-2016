@@ -1,0 +1,6 @@
+div.boolean {
+    display: block;
+    margin: 2px 0;
+    padding: .5em;
+    background: rgba(255,0,0,.1);
+}

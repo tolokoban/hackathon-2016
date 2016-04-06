@@ -1,0 +1,6 @@
+var $ = require("dom");
+
+
+exports.appendTo( hintID, parent ) {
+    
+};
