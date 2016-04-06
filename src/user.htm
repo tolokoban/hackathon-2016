@@ -15,12 +15,7 @@
         </x-row>
         <hr/>
         <div $tpl="planning" />
-        <hr/>
-        <p>Here is your QRCode. Just flash it to get your <b>wallet</b> on your phone or tablet.</p>
-        <center>
-            <x-widget name="qrcode" id="qrcode2"></x-widget>
-        </center>
-
+        <button id="random-hint" class="tp4-button green"><i>Random hint... (this button does not exist)</i></button>
     </x-template>
     <x-template name="user.visit">
         <li>
@@ -28,3 +23,9 @@
         </li>
     </x-template>
 </div>
+
+<hr/>
+<p>Here is your QRCode. Just flash it to get your <b>wallet</b> on your phone or tablet.</p>
+<center>
+    <x-widget name="qrcode" id="qrcode2"></x-widget>
+</center>

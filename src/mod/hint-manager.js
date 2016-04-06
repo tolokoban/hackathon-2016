@@ -38,6 +38,7 @@ function addItem( item, parent, exec ) {
     var type = end( item.data );
     switch( type ) {
         case 'bool': return addBool( item, parent );
+        case 'file': return addFile( item, parent );
     }
 }
 
@@ -46,6 +47,13 @@ function end( txt ) {
     return txt.split( "." ).pop();
 }
 
+function addFile( item , parent ) {
+    var elem = $.div([
+        item.caption,
+        $.tag( 'input', { type: 'file' } )
+    ]);
+    parent.appendChild( elem );
+}
 
 function addBool( item, parent ) {
     parent.appendChild( Bool( item ) );

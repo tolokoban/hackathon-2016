@@ -159,11 +159,17 @@ div.nurse-question > div.show {
 
 #dentist-map {
     display: block;
-    margin: 0;
-    width: 480px;
-    height: 640px;
+/*
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+*/
     background-repeat:   no-repeat;
     background-position: 50% 50%;
-    background-size:     contain;
+    background-size:     cover;
     background-image:    url(main/map-dentist.jpg);
 }

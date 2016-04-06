@@ -45,8 +45,8 @@ exports.compile = function(root, libs) {
             + "  html {\n"
             + "    font-size: " + (100 / root.attribs.cols) + "vw;\n"
             + "  }\n";
-    style += "@media (max-width: " + root.attribs.width + "px) {\n" + media + "}\n";
-    style += "@media (max-height: " + root.attribs.height + "px) {\n" + media + "}\n";
+    style += "@media (max-device-width: " + root.attribs.width + "px) {\n" + media + "}\n";
+    style += "@media (max-device-height: " + root.attribs.height + "px) {\n" + media + "}\n";
     delete root.attribs.width;
     delete root.attribs.height;
     libs.compileChildren( root );

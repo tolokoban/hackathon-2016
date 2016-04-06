@@ -34,6 +34,24 @@ module.exports = {
         ]
     },
 
+    newradio: {
+        question: "Do we take a new appointment?",
+        answers: [ ["No"], ["Yes"] ]
+    },
+    uploadradio: {
+        question: "Please upload your x-ray.",
+        answers: [
+            { data: "event.appointment._451.radio.file", caption: "X-ray file" },
+            [ "Upload" ]
+        ]
+    },
+
+    reminder0: {
+        question: "Don't forget to take your pills this evening just before dinner.",
+        answers: [
+            [ "Got it!" ]
+        ]
+    },
     reminder1: {
         question: "You have an appointement with your GP <b>tomorrow</b>.<br/>Please confirm your vaccinations.",
         answers: [
@@ -44,6 +62,13 @@ module.exports = {
         ]
     },
     reminder2: {
+        question: "Yesterday, you went to the radiologist.<br/>Is that right?",
+        answers: [
+            [ "yes", "uploadradio" ],
+            [ "no", "newradio" ]
+        ]
+    },
+    reminder3: {
         question: "You have to go to the hospital <b>next week</b>.<br/>Please confirm your allergies.",
         answers: [
             { data: "allergies.dust.bool", caption: "Dust" },

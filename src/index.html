@@ -1,13 +1,13 @@
 <x-html app="main">
     <x-central-box id="x-central-box" width="480" height="640" cols="20">
-        <x-book hash="book">
-            <main data-activate="onActivateMain"><x-include src="main.htm"/></main>
+        <x-book hash="book" scroll>
+            <main scroll data-activate="onActivateMain"><x-include src="main.htm"/></main>
             <lockscreen><x-include src="lockscreen.htm"/></lockscreen>
             <how-to-flash><x-include src="how-to-flash.htm"/></how-to-flash>
             <lost><x-include src="lost.htm"/></lost>
             <new><x-include src="new.htm"/></new>
             <user scroll data-activate="onActivateUser"><x-include src="user.htm"/></user>
-            <user-edit data-activate="onActivateUserEdit"><x-include src="user-edit.htm"/></user-edit>
+            <user-edit scroll data-activate="onActivateUserEdit"><x-include src="user-edit.htm"/></user-edit>
             
             <event scroll data-activate="onActivateEvent"><x-include src="event.htm"/></event>
             <dentist><x-include src="dentist.htm"/></dentist>
@@ -18,6 +18,8 @@
             <registration-1><x-include src="registration-1.htm"/></registration-1>            
             <registration1><x-include src="registration1.htm"/></registration1>            
             <registration2><x-include src="registration2.htm"/></registration2>            
+
+            <report><x-include src="report.htm"/></report>
         </x-book>
     </x-central-box>
 
