@@ -1,0 +1,10 @@
+['app', [
+    ['input-text', { data: 'tmp.date', text: 'Date' }],
+    ['input-text', { data: 'tmp.text', text: 'Subject' }],
+    ['button', { text: "Add", action: [
+        function() {
+
+        },
+        "appointments"
+    ]}]
+]]

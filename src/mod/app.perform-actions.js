@@ -9,13 +9,18 @@ var Tpl = require("x-template");
 var InputBool = require("input-boolean");
 var InputText = require("input-text");
 var InputFile = require("input-file");
-var InputDate = require("input-text");
+var InputDate = require("input-date");
 
 
 module.exports = function( children ) {
     var body = $.div();
 
-    children.forEach(function ( child ) {
+    children.forEach(function ( child, idx ) {
+        if( !Array.isArray( child ) ) {
+            console.error( "Element #" + idx + " should be an array!" );
+            console.info("[app.perform-actions] child=...", child);
+            console.info("[app.perform-actions] children=...", children);
+        }
         var actionID = child[0];
         var action = actions[actionID];
         if( action ) {
@@ -41,7 +46,13 @@ var actions = {
         return div;
     },
     button: function( args ) {
-        var btn = $.tag( 'a', 'button', { href: '#' + parse( args.action ) } );
+        var btn = $.tag( 'a', 'button' );
+        $.on( btn, function() {
+            var target = parse( args.action );
+            if( typeof target === 'string' && target.length > 0 ) {
+                location.hash = "#" + target;
+            }
+        });
         btn.innerHTML = parse( args.text );
         return btn;
     },
@@ -86,8 +97,25 @@ var actions = {
         var arr = Data.get( list );
         if( !Array.isArray( arr ) ) arr = [arr];
 
-        if( sort.trim().length > 0 ) {
+        // Sorting.
+        if( typeof sort === 'string' && sort.trim().length > 0 ) {
+            sort = [sort];
+        }
+        if( Array.isArray( sort ) ) {
+            arr.sort(function( a, b ) {
+                var i, att;
+                for (i = 0 ; i < sort.length ; i++) {
+                    att = sort[i];
+                    if( a[att] < b[att] ) return -1;
+                    if( a[att] > b[att] ) return 1;
+                }
+                return 0;
+            });
+        }
 
+        // Filtering.
+        if( typeof args.filter === 'function' ) {
+            arr = arr.filter( args.filter );
         }
 
         var content = $.div();
@@ -103,10 +131,11 @@ var actions = {
 
 function parse( input ) {
     if( Array.isArray( input ) ) {
-        var i, item;
+        var i, item, result;
         for (i = 0 ; i < input.length ; i++) {
             item = input[i];
-            if( typeof item !== 'undefined' && item !== 'null' ) return parse( item );
+            result = parse( item );
+            if( typeof result !== 'undefined' && result !== 'null' ) return result;
         }
     }
     else if( typeof input === 'function' ) {
@@ -130,5 +159,5 @@ function parse( input ) {
         return output + input.substr( cursor );
     }
 
-    return "" + input;
+    return undefined;
 }
