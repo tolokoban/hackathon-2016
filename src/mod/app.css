@@ -1,0 +1,288 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: sans-serif;
+    color: #000;
+    font-weight: 300;
+    font-size: 1.2vw;
+    background-color: #76b6e1;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-repeat:   no-repeat;
+    background-position: 50% bottom;
+    background-size:     contain;
+    background-image:    url(app/background.png);
+    overflow: hidden;
+}
+
+body.demo #DEMO {
+    opacity: 1;
+    transition: all .3s;
+}
+
+a.header {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 2rem;
+    line-height: 2rem;
+    background: #000;
+    color: yellow;
+    text-align: center;
+    text-decoration: none;
+}
+
+#DEMO {
+    opacity: .6;
+    position: absolute;
+    left: 0;
+    top: 2rem;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: auto;
+    background: rgba(255,255,255,.8);
+    font-weight: 500;
+    font-size: 3vw;
+    color: #000;
+    overflow: auto;
+    padding: 1em;
+    transition: all .3s;
+}
+
+#APP {
+    position: absolute;
+    left: 60vw;
+    top: 1vh;
+    right: 10vw;
+    bottom: 1vh;
+    width: auto;
+    height: auto;
+    background-repeat:   no-repeat;
+    background-position: 50% 50%;
+    background-size:     100% 100%;
+    background-image:    url(app/phone.png);
+}
+
+#APP-BODY {
+    position: absolute;
+    left: 7%;
+    top: 10.5%;
+    right: 7.8%;
+    bottom: 14.5%;
+    background: transparent;
+    width: auto;
+    height: auto;
+}
+
+#APP-BODY div.app {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #76B6E1;
+    box-shadow: 0 0 4px rgba(0,0,0,.5) inset;
+    padding: .5em;
+    overflow: auto;
+    transition: transform .5s;
+    transform: scale(1);
+}
+
+#APP-BODY div.app.hide {
+    transition: transform .3s;
+    transform: scale(0);
+}
+
+
+#APP-BODY a.button {
+    display: block;
+    line-height: 2em;
+    height: 2em;
+    border-radius: 1em;
+    padding: 0 1em;
+    text-align: center;
+    background: orange;
+    color: #000;
+    text-shadow: 1px 1px #fff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: .5em 0;
+    box-shadow: 0 0 1px #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#x-central-box.x-central-box {
+    border-radius: 8px;
+    box-shadow: 0 0 2px 0px #000
+}
+
+div.tfw-wdg-book > div {
+    padding: .5rem;
+}
+
+h1 {
+    font-weight: 500;
+    font-variant: small-caps;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #555;
+    color: #ff0;
+    margin: 0 0 1rem 0;
+    background: #432;
+    padding: .2em 1em;
+    text-align: center;
+    border-radius: 5px 5px 0 0 !important;
+}
+
+article {
+    margin: 1rem 0;
+}
+
+hr {
+    clear: both;
+    width: 100%;
+    height: 1px;
+    background-image: -webkit-linear-gradient(to right, transparent, #777, transparent);
+    background-image: linear-gradient(to right, transparent, #777, transparent);
+    border: none;
+    box-shadow: none;
+}
+
+b {
+    font-weight: 900;
+}
+
+div#wait {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.7);
+}
+
+div#wait > div {
+    position: absolute;
+    margin: -64px -64px;
+    left: 50%;
+    top: 50%;
+}
+
+
+div.lockscreen-table {
+    display: table;
+    border-collapse: collapse;
+}
+
+div.lockscreen-table > div {
+    display: table-row;
+}
+
+div.lockscreen-table > div > div {
+    text-decoration: none;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    background: #678;
+    color: #fed;
+    font-weight: bold;
+    font-size: 3em;
+    width: 96px;
+    height: 96px;
+    cursor: pointer;
+    transition: all .3s;
+    border-radius: 100%;
+    text-shadow: 1px 1px #000;
+}
+
+div.lockscreen-table > div > div:hover {
+    background: #47a;
+    color: #fc9;
+    transition: all .3s;
+}
+
+
+div.hint {
+    margin: 1em 0;
+}
+
+div.nurse-question {
+    background-repeat:   no-repeat;
+    background-position: 0 0;
+    background-image:    url(app/nurse.png);
+    padding: 0;
+    padding-left: 6em;
+    min-height: 7em;
+    background-size: 5em;
+    margin: 1em 0;
+}
+
+div.nurse-question > div {
+    font-family: serif;
+    margin: 0;
+    padding: 1em;
+    border: 1px solid black;
+    background: #eee;
+    color: #333;
+    font-style: italic;
+    font-size: 1.1em;
+    box-shadow: 2px 2px 1px #777;
+    border-radius: .5em;
+    transition: opacity .3s;
+}
+
+div.nurse-question > div.show {
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+
+#dentist-map {
+    display: block;
+/*
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+*/
+    background-repeat:   no-repeat;
+    background-position: 50% 50%;
+    background-size:     cover;
+    background-image:    url(app/map-dentist.jpg);
+}

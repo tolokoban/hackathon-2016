@@ -1,0 +1,2 @@
+require("boolean",function(a,e){var t=require("dom"),o=require("data");e.exports=function(a){var e=t.div("boolean",[a.caption]);return o.get(a.data)&&t.addClass(e,"yes"),t.on(e,function(){o.get(a.data)?(t.removeClass(e,"yes"),o.set(a.data,0)):(t.addClass(e,"yes"),o.set(a.data,1))}),e}});
+//# sourceMappingURL=boolean.js.map

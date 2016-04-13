@@ -1,0 +1,4 @@
+['app', [
+    ['nurse', "Hi {{firstname}},<br/>how can I help you?"],
+    ['button', { text: "I limb!", action: "s1-app2" }]
+]]

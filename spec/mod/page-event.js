@@ -1,0 +1,2 @@
+require("page-event",function(e,r){var a=require("dom"),t=require("hint-manager");e.activate=function(){var e=a.get("#event");a.clear(e),t.appendTo("start",e)}});
+//# sourceMappingURL=page-event.js.map
