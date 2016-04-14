@@ -156,11 +156,16 @@ exports['s1-app1'] = ['app', [
 
 exports['s1-app2'] = ['app', [
     ['nurse', "Ho! I'm sorry.<br/>I think you should call your GP."],
-    ['button', { text: "{{gp.name}} <i>{{gp.phone}}</i>", action: "s1-app2" }],
-    ['button', { text: "Find another one", action: "" }],
+    ['button', { text: "{{gp.name}} <i>{{gp.phone}}</i>", action: "s1-demo3" }],
+    ['button', { text: "Find another one", action: "s1-demo3" }],
     ['input-bool', { data: "vaccination.ror.done", text: "Vaccination againts turtles" }],
     ['input-text', { data: "firstname", text: "Firstname" }],
     ['input-file', { data: "x-ray", text: "X-Ray scan" }]
+]]
+
+exports['s1-demo3'] = ['demo', [
+    ['text', "{{firstname}} {{lastname}} calls the doctor's secretary and get an appointment for May 5, 2016."],
+    ['button', { text: "He records the appointment in pHM&trade;", action: "s1-app1" }]
 ]]
 
 exports['scenario1'] = ['demo', [
@@ -203,7 +208,7 @@ require('x-template').register("nurse", function( root ) {
 
     }
 );
-require("$",function(n,a){n.config={name:"hackathon-2016",description:"Stuff for the Open Geneva Hackathon in 2016",author:"Tolokoban",version:"0.0.2",major:0,minor:0,revision:2,date:new Date(2016,3,14,15,11,33)};var r=null;n.lang=function(n){return void 0===n&&(n=window.localStorage.getItem("Language"),n||(n=window.navigator.language,n||(n=window.navigator.browserLanguage,n||(n="fr"))),n=n.substr(0,2).toLowerCase()),r=n,window.localStorage.setItem("Language",n),n},n.intl=function(a,r){var t,e,o,i,g,u,l=a[n.lang()],s=r[0];if(!l)return s;if(t=l[s],!t)return s;if(r.length>1){for(e="",g=0,o=0;o<t.length;o++)i=t.charAt(o),"$"===i?(e+=t.substring(g,o),o++,u=t.charCodeAt(o)-48,e+=0>u||u>=r.length?"$"+t.charAt(o):r[u],g=o+1):"\\"===i&&(e+=t.substring(g,o),o++,e+=t.charAt(o),g=o+1);e+=t.substr(g),t=e}return t}});
+require("$",function(n,a){n.config={name:"hackathon-2016",description:"Stuff for the Open Geneva Hackathon in 2016",author:"Tolokoban",version:"0.0.6",major:0,minor:0,revision:6,date:new Date(2016,3,14,17,2,36)};var r=null;n.lang=function(n){return void 0===n&&(n=window.localStorage.getItem("Language"),n||(n=window.navigator.language,n||(n=window.navigator.browserLanguage,n||(n="fr"))),n=n.substr(0,2).toLowerCase()),r=n,window.localStorage.setItem("Language",n),n},n.intl=function(a,r){var t,e,o,i,g,u,l=a[n.lang()],s=r[0];if(!l)return s;if(t=l[s],!t)return s;if(r.length>1){for(e="",g=0,o=0;o<t.length;o++)i=t.charAt(o),"$"===i?(e+=t.substring(g,o),o++,u=t.charCodeAt(o)-48,e+=0>u||u>=r.length?"$"+t.charAt(o):r[u],g=o+1):"\\"===i&&(e+=t.substring(g,o),o++,e+=t.charAt(o),g=o+1);e+=t.substr(g),t=e}return t}});
 //# sourceMappingURL=$.js.map
 require("x-template",function(e,t){var r={};e.register=function(e,t){r[e]=t},e.appendTo=function(e,t){var n=r[e];if("undefined"==typeof n)throw Error("[x-template.create] Template not found: "+e+"!");if("function"!=typeof n)throw Error("[x-template.create] Template is not a function: "+e+"!");return n(t)}});
 //# sourceMappingURL=x-template.js.map
