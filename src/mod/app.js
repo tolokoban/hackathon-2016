@@ -15,7 +15,10 @@ var WDG = {
 };
 
 
-Hash( function( actionID ) {
+Hash( function( actionID, arg1, arg2, arg3 ) {
+    Data.set( "arg1", arg1 );
+    Data.set( "arg2", arg2 );
+    Data.set( "arg3", arg3 );
     var action = Actions[actionID];
     if( typeof action === 'undefined' ) {
         console.error( 'Unknown action: "' + actionID + '"' );

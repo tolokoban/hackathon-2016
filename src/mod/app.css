@@ -67,6 +67,14 @@ a.header {
     transition: all .3s;
 }
 
+body.msg #APP,
+body.app #APP {
+    transition: all .3s;
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+
 #APP {
     position: absolute;
     left: 60vw;
@@ -79,6 +87,9 @@ a.header {
     background-position: 50% 50%;
     background-size:     100% 100%;
     background-image:    url(app/phone.png);
+    transition: all .3s;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
 }
 
 #APP-BODY {
@@ -126,6 +137,21 @@ a.header {
     text-shadow: 1px 1px #fff;
     text-decoration: none;
     font-weight: bold;
+    margin: .5em 0;
+    box-shadow: 0 0 1px #000;
+    cursor: pointer;
+}
+
+
+#APP-BODY a.box {
+    display: block;
+    border-radius: 2px;
+    padding: .5em;
+    text-align: left;
+    background: #9CD;
+    color: #000;
+    text-shadow: 1px 1px #fff;
+    text-decoration: none;
     margin: .5em 0;
     box-shadow: 0 0 1px #000;
     cursor: pointer;

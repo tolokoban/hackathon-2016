@@ -1,0 +1,2 @@
+require("input-file",function(e,t){var a=require("dom"),i=require("data");t.exports=function(e){var t=a.tag("input",{type:"file"}),n=a.tag("label","text",[a.div([e.text]),t]);return"undefined"!=typeof i.get(e.data)&&(t.value=i.get(e.data)),t.addEventListener("blur",function(){i.set(e.data,t.value)}),n}});
+//# sourceMappingURL=input-file.js.map

@@ -12,12 +12,17 @@
     ['button', { text: "New Appointment", action: "new-appointment" }],
     ['loop', {
         list: "appointments",
-        item: "tmp.appointment",
+        item: "tmp.apt",
         sort: "date",
         filter: function( item ) {
             return true; //item.text.indexOf( 'Ray' ) == -1;
         }
     }, [
-        ['text', "<p><b>{{tmp.appointment.date|datetime}}</b><br/>{{tmp.appointment.text}}</p>"]
+        ['button', {
+            style: 'box',            
+            text: "<div><b>{{tmp.apt.date|datetime}}</b><br/>{{tmp.apt.text}}</div>",
+            freeze: "tmp.apt.$key",
+            action: "appointment/{{tmp.apt.$key}}"
+        }]
     ]]
 ]]

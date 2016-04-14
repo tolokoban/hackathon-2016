@@ -11,14 +11,23 @@ var MONTHES = [ 'January', 'February', 'March', 'April',
 exports.get = function( name ) {
     var data = DATA;
     var path = explodePath( name );
+    var item;
+    var key;
     var i;
     for( i=0 ; i<path.length ; i++ ) {
-        while( Array.isArray( data ) ) {
-            // Take the last element of an array.
-            data = data[data.length - 1];
-        }
-        data = data[path[i]];
+        item = path[i];        
+        data = data[item.name];
         if( typeof data === 'undefined' ) return undefined;
+        if( Array.isArray( data ) && item.index ) {
+            key = exports.get( item.index );
+            data = data.find(function( elem ) {
+                return elem.$key == key;
+            });
+            if( typeof data === 'undefined' ) {
+                console.error( 'Key `' + key + "` not found in `" + name + "` at level " + i + "!" );
+                return undefined;
+            }
+        }
     }
 
     return data;
@@ -32,12 +41,12 @@ exports.set = function( name, value ) {
     var path = explodePath( name );
     var i;
     for( i=0 ; i<path.length - 1 ; i++ ) {
-        if( typeof data[path[i]] === 'undefined' ) {
-            data[path[i]] = {};
+        if( typeof data[path[i].name] === 'undefined' ) {
+            data[path[i].name] = {};
         }
-        data = data[path[i]];
+        data = data[path[i].name];
     }
-    data[path.pop()] = value;
+    data[path.pop().name] = value;
 };
 
 exports.reset = function() {
@@ -59,7 +68,9 @@ exports.save = function() {
 };
 
 
-exports.parse = function( input ) {
+exports.parse = function( input, context ) {
+    if( typeof context === 'undefined' ) context = {};
+
     if( Array.isArray( input ) ) {
         var i, item, result;
         for (i = 0 ; i < input.length ; i++) {
@@ -85,7 +96,12 @@ exports.parse = function( input ) {
             posEnd = input.indexOf( '}}', cursor );
             if( posEnd == -1 ) break;
             variable = input.substr( cursor, posEnd - cursor ).trim().split( '|' );
-            variable[0] = exports.get( variable[0] ) || '';
+            if( typeof context[variable[0]] !== 'undefined' ) {
+                // This is a frozen var. Used in looping context.
+                variable[0] = context[variable[0]];
+            } else {
+                variable[0] = exports.get( variable[0] ) || '';
+            }
             for( i = 1 ; i < variable.length ; i++ ) {
                 variable[0] = format( variable[0], variable[i] );
             }
@@ -193,18 +209,50 @@ function explodePath( name ) {
     var cursor = 0;
     var mode = 0;
     var path = [];
+    var pathItem;
     var c;
     
-    while( cursor < name.length ) {
+    for( cursor = 0 ; cursor < name.length ; cursor++ ) {
         c = name.charAt( cursor );
         if( mode == 0 ) {
-            if( c == '[' ) {
-                
-            }
-            else if ( c == '.' ) {
-
+            if( c == '[' || c == '.' ) {
+                pathItem = { name: name.substr( start, cursor - start ) };
+                path.push( pathItem );
+                start = cursor + 1;
+                if( c == '[' ) {
+                    mode = 1;
+                }
             }
         }
+        else if( mode == -1 ) {
+            // After a `]`, we must find a `.`.
+            if( c == '.' ) {
+                start = cursor + 1;
+                mode = 0;
+            }
+            else {
+                console.error( "Bad var name!\n" + name + "\nPos: " + cursor );
+            }
+        }
+        else {
+            if( c == '[' ) {
+                mode++;
+            }
+            else if( c == ']' ) {
+                mode--;
+                if( mode == 0 ) {
+                    pathItem.index = name.substr( start, cursor - start );
+                    start = cursor + 1;
+                    mode = -1;
+                }
+            }
+        }
+    }
+    if( mode == 0 ) {
+        path.push( { name: name.substr( start ) } );
+    }
+    else {
+        console.error( "Bad ending for var name!\n" + name );
     }
 
     return path;

@@ -1,44 +1,44 @@
 {
-  "name": "hackathon-2016",
-  "version": "0.0.2",
-  "description": "Stuff for the Open Geneva Hackathon in 2016",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "debug": "node node_modules/toloframework/bin/tfw.js build dev test php watch",
-    "clean": "node node_modules/toloframework/bin/tfw.js clean",
-    "release": "node node_modules/toloframework/bin/tfw.js build version php clean"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tolokoban/hackathon-2016.git"
-  },
-  "keywords": [
-    "hackathon",
-    "health",
-    "hospital",
-    "registration",
-    "check-in",
-    "check-out",
-    "tolokoban"
-  ],
-  "author": "Tolokoban",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/tolokoban/hackathon-2016/issues"
-  },
-  "homepage": "git+https://github.com/tolokoban/hackathon-2016",
-  "devDependencies": {
-    "jasmine": "^2.4.1",
-    "toloframework": "^0.34.2"
-  },
-  "tfw": {
-    "modules": [],
-    "compile": {
-      "type": "firefoxos",
-      "files": "\\.html$"
+    "name": "hackathon-2016",
+    "version": "0.0.7",
+    "description": "Stuff for the Open Geneva Hackathon in 2016",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "debug": "node node_modules/toloframework/bin/tfw.js build dev test php watch",
+        "clean": "node node_modules/toloframework/bin/tfw.js clean",
+        "release": "node node_modules/toloframework/bin/tfw.js build version php clean"
     },
-    "output": "../../www/hackathon"
-  },
-  "reservedModules": []
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tolokoban/hackathon-2016.git"
+    },
+    "keywords": [
+        "hackathon",
+        "health",
+        "hospital",
+        "registration",
+        "check-in",
+        "check-out",
+        "tolokoban"
+    ],
+    "author": "Tolokoban",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/tolokoban/hackathon-2016/issues"
+    },
+    "homepage": "git+https://github.com/tolokoban/hackathon-2016",
+    "devDependencies": {
+        "jasmine": "^2.4.1",
+        "toloframework": "^0.34.2"
+    },
+    "tfw": {
+        "modules": [],
+        "compile": {
+            "type": "firefoxos",
+            "files": "\\.html$"
+        },
+        "output": "../../www/hackathon"
+    },
+    "reservedModules": []
 }

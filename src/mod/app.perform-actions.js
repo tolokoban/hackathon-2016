@@ -46,9 +46,19 @@ var actions = {
         return div;
     },
     button: function( args ) {
-        var btn = $.tag( 'a', 'button' );
+        var btn = $.tag( 'a', args.style || 'button' );
+        var context = {};
+        if( args.freeze ) {
+            if( !Array.isArray( args.freeze ) ) {
+                args.freeze = [args.freeze];
+            }
+            args.freeze.forEach(function ( name ) {
+                context[name] = Data.get( name );
+            });
+
+        }
         $.on( btn, function() {
-            var target = parse( args.action );
+            var target = parse( args.action, context );
             if( typeof target === 'string' && target.length > 0 ) {
                 location.hash = "#" + target;
             }
@@ -129,7 +139,7 @@ var actions = {
 };
 
 
-function parse( input ) {
-    return Data.parse( input );
+function parse( input, context ) {
+    return Data.parse( input, context );
 }
 
