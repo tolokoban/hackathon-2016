@@ -1,5 +1,0 @@
-<h1>Edit your data</h1>
-
-<x-widget name="tp4.input" id="user-edit-firstname" $label="Firstname" />
-<x-widget name="tp4.input" id="user-edit-firstname" $label="Lastname" />
-

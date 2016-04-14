@@ -1,7 +1,0 @@
-<h1>New registration</h1>
-
-<x-widget name="tp4-input" id="email" class="wide">{label: "Email"}</x-widget>
-<x-widget name="tp4-input" id="firsname" class="wide">{label: "First Name"}</x-widget>
-<x-widget name="tp4-input" id="lastname" class="wide">{label: "Last Name"}</x-widget>
-
-

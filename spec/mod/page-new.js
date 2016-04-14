@@ -1,2 +1,0 @@
-require("page-new",function(e,t){var i=require("dom"),n=require("tfw.web-service"),a=require("x-widget"),r=require("md5"),o=require("tfw.storage").local,w=document.getElementById("btnNewRegistration");i.on(w,function(){APP.waitOn();var e=a.getById("new-email").val(),t=a.getById("new-firstname").val(),i=a.getById("new-lastname").val();o.set("id",r(e)),n.get("registration",["new",{email:e,firstname:t,lastname:i}]).then(function(e){APP.waitOff(),window.location="#/book/registration"+e},function(e){APP.waitOff()})})});
-//# sourceMappingURL=page-new.js.map

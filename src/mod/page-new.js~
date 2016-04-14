@@ -1,9 +1,0 @@
-var $ = require("dom");
-var Wdg = require("x-widget");
-
-var btnNewRegistration = document.getElementById( 'btnNewRegistration' );
-$.on( btnNewRegistration, function() {
-    var email = Wdg.getById( 'new-email' ).val();
-    var firstname = Wdg.getById( 'new-firstname' ).val();
-    var lastname = Wdg.getById( 'new-lastname' ).val();
-});
