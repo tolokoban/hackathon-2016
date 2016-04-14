@@ -60,6 +60,15 @@ addListener(
         document.body.parentNode.$data = {};
         // Attach controllers.
         require('actions', function(exports, module) {
+exports['appointment'] = ['app', [
+    ['text', '<h1>Appointment</h1>'],
+    ['text', '<code>arg0 = "{{arg0}}"</code>'],
+    ['text', '<code>arg1 = "{{arg1}}"</code>'],
+    ['text', '<b>{{appointments[arg1].date|datetime}}</b>'],
+    ['text', '{{appointments[arg1].text}}'],
+    ['button', { text: "Back", action: "s1-app1" }]
+]]
+
 exports['appointments'] = ['app', [
     ['set', {
         appointments: [
@@ -82,8 +91,14 @@ exports['appointments'] = ['app', [
 ]]
 
 exports['main'] = ["demo", [
+    ["reset", { 
+        today: 20160501,
+        firstname: "Homer",
+        lastname: "Broken"
+    }],
     ["text", "Welcome! Please select a scenario:"],
-    ["button", { text: "Scenario blablabla", action: "scenario1" }]
+    ["button", { text: "Mr {{lastname}} limbs a bit", action: "scenario1" }],
+    ["button", { text: "Miss <i>blabla</i> has <i>blabla</i>", action: "scenario2" }],
 ]]
 
 exports['new-appointment'] = ['app', [
@@ -91,14 +106,17 @@ exports['new-appointment'] = ['app', [
     ['input-text', { data: 'tmp.text', text: 'Subject' }],
     ['button', { text: "Add", action: [
         function() {
-            var appointments = this.get('appointments');
-            appointments.push({
-                date: this.get('tmp.date'),
-                text: this.get('tmp.text')
-            });
+            this.push(
+                "appointments",
+                {
+                    date: this.get('tmp.date'),
+                    text: this.get('tmp.text')
+                }
+            );
         },
-        "appointments"
-    ]}]
+        "s1-app1"
+    ]}],
+    ['button', { text: "Cancel", action: "s1-app" }]
 ]]
 
 exports['personal-data'] = ['app', [
@@ -115,20 +133,25 @@ exports['s1-app1'] = ['app', [
             { date: 201605080800, text: "X-Ray." }
         ]
     }],
-    ['loop', {
-        list: "appointments",
-        item: "tmp.appointment",
-        sort: "date",
-        filter: function( item ) {
-            return item.text.indexOf( 'Ray' ) == -1;
-        }
-    }, [
-        ['text', "<b>{{tmp.appointment.date}}</b>: {{tmp.appointment.text}}"]
-    ]],
     ['nurse', "Hi {{firstname}},<br/>how can I help you?"],
     ['button', { text: "I limb a bit!", action: "s1-app2" }],
     ['button', { text: "Edit personal data", action: "personal-data" }],
-    ['button', { text: "Appointments", action: "appointments" }]
+    ['button', { text: "New Appointment", action: "new-appointment" }],
+    ['loop', {
+        list: "appointments",
+        item: "tmp.apt",
+        sort: "date",
+        filter: function( item ) {
+            return true; //item.text.indexOf( 'Ray' ) == -1;
+        }
+    }, [
+        ['button', {
+            style: 'box',            
+            text: "<div><b>{{tmp.apt.date|datetime}}</b><br/>{{tmp.apt.text}}</div>",
+            freeze: "tmp.apt.$key",
+            action: "appointment/{{tmp.apt.$key}}"
+        }]
+    ]]
 ]]
 
 exports['s1-app2'] = ['app', [
@@ -143,8 +166,6 @@ exports['s1-app2'] = ['app', [
 exports['scenario1'] = ['demo', [
     ['reset', {
         today: 20160501,
-        firstname: "Henry",
-        lastname: "Broken",
         "gp.name": "Dr Frankenstein",
         "gp.phone": "+4122666000",
         appointments: [
@@ -153,7 +174,7 @@ exports['scenario1'] = ['demo', [
             { date: 201605080800, text: "X-Ray." }
         ]
     }],
-    ['text', "Mr Broker limps a lot."],
+    ['text', "{{today|date}} - Mr {{lastname}} limps a lot."],
     ['button', { text: "He looks at his pHM&trade; app", action: "s1-app1" }]
 ]]
 
@@ -182,17 +203,17 @@ require('x-template').register("nurse", function( root ) {
 
     }
 );
-require("$",function(n,a){n.config={name:"hackathon-2016",description:"Stuff for the Open Geneva Hackathon in 2016",author:"Tolokoban",version:"0.0.1",major:0,minor:0,revision:1,date:new Date(2016,3,1,19,54,30)};var r=null;n.lang=function(n){return void 0===n&&(n=window.localStorage.getItem("Language"),n||(n=window.navigator.language,n||(n=window.navigator.browserLanguage,n||(n="fr"))),n=n.substr(0,2).toLowerCase()),r=n,window.localStorage.setItem("Language",n),n},n.intl=function(a,r){var t,e,o,i,g,u,l=a[n.lang()],s=r[0];if(!l)return s;if(t=l[s],!t)return s;if(r.length>1){for(e="",g=0,o=0;o<t.length;o++)i=t.charAt(o),"$"===i?(e+=t.substring(g,o),o++,u=t.charCodeAt(o)-48,e+=0>u||u>=r.length?"$"+t.charAt(o):r[u],g=o+1):"\\"===i&&(e+=t.substring(g,o),o++,e+=t.charAt(o),g=o+1);e+=t.substr(g),t=e}return t}});
+require("$",function(n,a){n.config={name:"hackathon-2016",description:"Stuff for the Open Geneva Hackathon in 2016",author:"Tolokoban",version:"0.0.2",major:0,minor:0,revision:2,date:new Date(2016,3,14,15,11,33)};var r=null;n.lang=function(n){return void 0===n&&(n=window.localStorage.getItem("Language"),n||(n=window.navigator.language,n||(n=window.navigator.browserLanguage,n||(n="fr"))),n=n.substr(0,2).toLowerCase()),r=n,window.localStorage.setItem("Language",n),n},n.intl=function(a,r){var t,e,o,i,g,u,l=a[n.lang()],s=r[0];if(!l)return s;if(t=l[s],!t)return s;if(r.length>1){for(e="",g=0,o=0;o<t.length;o++)i=t.charAt(o),"$"===i?(e+=t.substring(g,o),o++,u=t.charCodeAt(o)-48,e+=0>u||u>=r.length?"$"+t.charAt(o):r[u],g=o+1):"\\"===i&&(e+=t.substring(g,o),o++,e+=t.charAt(o),g=o+1);e+=t.substr(g),t=e}return t}});
 //# sourceMappingURL=$.js.map
 require("x-template",function(e,t){var r={};e.register=function(e,t){r[e]=t},e.appendTo=function(e,t){var n=r[e];if("undefined"==typeof n)throw Error("[x-template.create] Template not found: "+e+"!");if("function"!=typeof n)throw Error("[x-template.create] Template is not a function: "+e+"!");return n(t)}});
 //# sourceMappingURL=x-template.js.map
-require("app",function(e,o){function a(e){n.clear(d.demo,c(e))}function r(e){var o=c(e);n.addClass(o,"app","hide"),n.clear(d.appBody,o),window.setTimeout(function(){n.removeClass(o,"hide")})}function i(e){var o=c(e);n.addClass(o,"msg","hide"),n.clear(d.appBody,o),window.setTimeout(function(){n.removeClass(o,"hide")})}var n=require("dom"),t=require("tfw.hash-watcher"),s=require("actions"),c=require("app.perform-actions"),d={demo:n.get("#DEMO"),app:n.get("#APP"),appBody:n.get("#APP-BODY")};t(function(e){var o=s[e];if("undefined"==typeof o)return console.error('Unknown action: "'+e+'"'),console.error(Object.keys(s)),void(location.hash="#main");var n=o[0].trim().toLowerCase(),t=o[1];switch(document.body.className=n,n){case"demo":a(t);break;case"app":r(t);break;case"msg":i(t)}})});
+require("app",function(e,a){function r(e){n.clear(p.demo,d(e))}function o(e){var a=d(e);n.addClass(a,"app","hide"),n.clear(p.appBody,a),window.setTimeout(function(){n.removeClass(a,"hide")})}function t(e){var a=d(e);n.addClass(a,"msg","hide"),n.clear(p.appBody,a),window.setTimeout(function(){n.removeClass(a,"hide")})}var n=require("dom"),i=require("data"),s=require("tfw.hash-watcher"),c=require("actions"),d=require("app.perform-actions"),p={demo:n.get("#DEMO"),app:n.get("#APP"),appBody:n.get("#APP-BODY")};s(function(e,a,s,d){i.set("arg1",a),i.set("arg2",s),i.set("arg3",d);var p=c[e];if("undefined"==typeof p)return console.error('Unknown action: "'+e+'"'),console.error(Object.keys(c)),void(location.hash="#main");var u=p[0].trim().toLowerCase(),m=p[1];switch(document.body.className=u,u){case"demo":r(m);break;case"app":o(m);break;case"msg":t(m)}n.get("#HEADER").innerHTML=i.parse("Open Hackathon 2016 - Team 3 - <b>{{today|date}}</b>")})});
 //# sourceMappingURL=app.js.map
-require("app.perform-actions",function(r,t){function n(r){if(Array.isArray(r)){var t,e,o;for(t=0;t<r.length;t++)if(e=r[t],o=n(e),"undefined"!=typeof o&&"null"!==o)return o}else{if("function"==typeof r)return n(r.call(i));if("string"==typeof r){for(var u,a,f=0,p="";;){if(u=r.indexOf("{{",f),-1==u)break;if(p+=r.substr(f,u-f),f=u+2,a=r.indexOf("}}",f),-1==a)break;p+=i.get(r.substr(f,a-f).trim()),f=a+2}return p+r.substr(f)}}}var e=require("dom"),i=require("data"),o=require("x-template"),u=require("input-boolean"),a=require("input-text"),f=require("input-file"),p=require("input-date");t.exports=function(r){var t=e.div();return r.forEach(function(n,e){Array.isArray(n)||(console.error("Element #"+e+" should be an array!"),console.info("[app.perform-actions] child=...",n),console.info("[app.perform-actions] children=...",r));var i=n[0],o=s[i];if(!o)throw"Unknonw type `"+i+"`!";var u=o.apply(t,n.slice(1));return"string"==typeof u?void(location.hash="#"+u):void(u&&t.appendChild(u))}),t};var s={text:function(r){var t=e.tag("p");return t.innerHTML=n(r),t},button:function(r){var t=e.tag("a","button");return e.on(t,function(){var t=n(r.action);"string"==typeof t&&t.length>0&&(location.hash="#"+t)}),t.innerHTML=n(r.text),t},nurse:function(r){var t=e.div(),i=o.appendTo("nurse",t);return i.text.innerHTML=n(r),t},reset:function(r){i.reset();var t,n;for(t in r)n=r[t],i.set(t,n)},set:function(r){var t,n;for(t in r)n=r[t],i.set(t,n)},"input-bool":function(r){return u(r)},"input-text":function(r){return a(r)},"input-file":function(r){return f(r)},"input-date":function(r){return p(r)},loop:function(r,o){var u=n(r.list),a=n(r.item),f=n(r.sort),p=i.get(u);Array.isArray(p)||(p=[p]),"string"==typeof f&&f.trim().length>0&&(f=[f]),Array.isArray(f)&&p.sort(function(r,t){var n,e;for(n=0;n<f.length;n++){if(e=f[n],r[e]<t[e])return-1;if(r[e]>t[e])return 1}return 0}),"function"==typeof r.filter&&(p=p.filter(r.filter));var s=e.div();return p.forEach(function(r){i.set(a,r),s.appendChild(t.exports(o))}),s}}});
+require("app.perform-actions",function(r,e){function n(r,e){return i.parse(r,e)}var t=require("dom"),i=require("data"),o=require("x-template"),u=require("input-boolean"),a=require("input-text"),f=require("input-file"),p=require("input-date");e.exports=function(r){var e=t.div();return r.forEach(function(n,t){Array.isArray(n)||(console.error("Element #"+t+" should be an array!"),console.info("[app.perform-actions] child=...",n),console.info("[app.perform-actions] children=...",r));var i=n[0],o=c[i];if(!o)throw"Unknonw type `"+i+"`!";var u=o.apply(e,n.slice(1));return"string"==typeof u?void(location.hash="#"+u):void(u&&e.appendChild(u))}),e};var c={text:function(r){var e=t.tag("p");return e.innerHTML=n(r),e},button:function(r){var e=t.tag("a",r.style||"button"),o={};return r.freeze&&(Array.isArray(r.freeze)||(r.freeze=[r.freeze]),r.freeze.forEach(function(r){o[r]=i.get(r)})),t.on(e,function(){var e=n(r.action,o);"string"==typeof e&&e.length>0&&(location.hash="#"+e)}),e.innerHTML=n(r.text),e},nurse:function(r){var e=t.div(),i=o.appendTo("nurse",e);return i.text.innerHTML=n(r),e},reset:function(r){i.reset();var e,n;for(e in r)n=r[e],i.set(e,n)},set:function(r){var e,n;for(e in r)n=r[e],i.set(e,n)},"input-bool":function(r){return u(r)},"input-text":function(r){return a(r)},"input-file":function(r){return f(r)},"input-date":function(r){return p(r)},loop:function(r,o){var u=n(r.list),a=n(r.item),f=n(r.sort),p=i.get(u);Array.isArray(p)||(p=[p]),"string"==typeof f&&f.trim().length>0&&(f=[f]),Array.isArray(f)&&p.sort(function(r,e){var n,t;for(n=0;n<f.length;n++){if(t=f[n],r[t]<e[t])return-1;if(r[t]>e[t])return 1}return 0}),"function"==typeof r.filter&&(p=p.filter(r.filter));var c=t.div();return p.forEach(function(r){i.set(a,r),c.appendChild(e.exports(o))}),c}}});
 //# sourceMappingURL=app.perform-actions.js.map
 require("input-date",function(e,t){var a=require("dom"),n=require("data");t.exports=function(e){var t=a.tag("input",{type:"datetime"}),r=a.tag("label","text",[a.div([e.text]),t]);return"undefined"!=typeof n.get(e.data)&&(t.value=n.get(e.data)),t.addEventListener("blur",function(){n.set(e.data,t.value),n.save()}),r}});
 //# sourceMappingURL=input-date.js.map
-require("data",function(e,t){var r=(require("tfw.web-service"),require("tfw.storage").local),n=r.get("data",{})||{};e.get=function(e){var t,r=n,a=e.split(".");for(t=0;t<a.length;t++){for(;Array.isArray(r);)r=r[r.length-1];if(r=r[a[t]],"undefined"==typeof r)return}return r},e.set=function(e,t){var r,a=n,f=e.split(".");for(r=0;r<f.length-1;r++)"undefined"==typeof a[f[r]]&&(a[f[r]]={}),a=a[f[r]];a[f.pop()]=t},e.reset=function(){data={},e.save()},e.save=function(){r.set("data",n)}});
+require("data",function(e,r){function t(e){if(Array.isArray(e))"number"!=typeof e.$key&&(e.$key=1),e.forEach(function(r){"number"!=typeof r.$key&&(r.$key=e.$key++),t(r)});else if("object"==typeof e){var r;for(r in e)t(e[r])}}function n(r,t){switch(t){case"date":return r=e.num2dat(r),s[r.getMonth()]+" "+r.getDate()+", "+r.getFullYear();case"time":return r=e.num2dat(r),r.getHours()+":"+e.pad(r.getMinutes());case"datetime":return r=e.num2dat(r),s[r.getMonth()]+" "+r.getDate()+", "+r.getFullYear()+"  "+r.getHours()+":"+e.pad(r.getMinutes())}return r}function a(e){var r,t,n=0,a=0,u=0,o=[];for(a=0;a<e.length;a++)t=e.charAt(a),0==u?"["!=t&&"."!=t||(r={name:e.substr(n,a-n)},o.push(r),n=a+1,"["==t&&(u=1)):-1==u?"."==t?(n=a+1,u=0):console.error("Bad var name!\n"+e+"\nPos: "+a):"["==t?u++:"]"==t&&(u--,0==u&&(r.index=e.substr(n,a-n),n=a+1,u=-1));return 0==u?o.push({name:e.substr(n)}):console.error("Bad ending for var name!\n"+e),o}var u=(require("tfw.web-service"),require("tfw.storage").local),o=u.get("data",{})||{},s=["January","February","March","April","May","June","July","August","September","October","November","December"];e.get=function(r){var t,n,u,s=o,f=a(r);for(u=0;u<f.length;u++){if(t=f[u],s=s[t.name],"undefined"==typeof s)return;if(Array.isArray(s)&&t.index&&(n=e.get(t.index),s=s.find(function(e){return e.$key==n}),"undefined"==typeof s))return void console.error("Key `"+n+"` not found in `"+r+"` at level "+u+"!")}return s},e.set=function(e,r){t(r);var n,u=o,s=a(e);for(n=0;n<s.length-1;n++)"undefined"==typeof u[s[n].name]&&(u[s[n].name]={}),u=u[s[n].name];u[s.pop().name]=r},e.reset=function(){data={},e.save()},e.save=function(){u.set("data",o)},e.parse=function(r,t){if("undefined"==typeof t&&(t={}),Array.isArray(r)){var a,u,o;for(a=0;a<r.length;a++)if(u=r[a],o=e.parse(u),"undefined"!=typeof o&&"null"!==o)return o}else{if("function"==typeof r)return e.parse(r.call(e));if("string"==typeof r){for(var s,f,i,d=0,y="";;){if(s=r.indexOf("{{",d),-1==s)break;if(y+=r.substr(d,s-d),d=s+2,f=r.indexOf("}}",d),-1==f)break;for(i=r.substr(d,f-d).trim().split("|"),"undefined"!=typeof t[i[0]]?i[0]=t[i[0]]:i[0]=e.get(i[0])||"",a=1;a<i.length;a++)i[0]=n(i[0],i[a]);y+=i[0],d=f+2}return y+r.substr(d)}}},e.num2dat=function(e){for(var r=""+e;r.length<12;)r+="0";return new Date(parseInt(r.substr(0,4)),parseInt(r.substr(4,2))-1,parseInt(r.substr(6,2)),parseInt(r.substr(8,2)),parseInt(r.substr(10,2)),0)},e.pad=function(e,r,t){for("undefined"==typeof r&&(r=2),"undefined"==typeof t&&(t="0"),e=""+e;e.length<r;)e=t+e;return e},e.push=function(r,n){var a=e.get(r);return Array.isArray(a)?(t(a),n.$key=a.$key++,n.$key):(console.error("[Data.push] `"+r+"` is not an array!"),0)}});
 //# sourceMappingURL=data.js.map
 require("tfw.storage",function(t,e){function n(t){return function(e,n){var o=t.getItem(e);if(null===o)return n;try{o=JSON.parse(o)}catch(r){}return o}}function o(t){return function(e,n){t.setItem(e,JSON.stringify(n))}}t.local={get:n(window.localStorage),set:o(window.localStorage)},t.session={get:n(window.sessionStorage),set:o(window.sessionStorage)}});
 //# sourceMappingURL=tfw.storage.js.map
