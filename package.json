@@ -1,6 +1,6 @@
 {
   "name": "hackathon-2016",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stuff for the Open Geneva Hackathon in 2016",
   "main": "index.js",
   "scripts": {
@@ -39,5 +39,6 @@
       "files": "\\.html$"
     },
     "output": "../../www/hackathon"
-  }
+  },
+  "reservedModules": []
 }

@@ -130,34 +130,6 @@ var actions = {
 
 
 function parse( input ) {
-    if( Array.isArray( input ) ) {
-        var i, item, result;
-        for (i = 0 ; i < input.length ; i++) {
-            item = input[i];
-            result = parse( item );
-            if( typeof result !== 'undefined' && result !== 'null' ) return result;
-        }
-    }
-    else if( typeof input === 'function' ) {
-        return parse( input.call( Data ) );
-    }
-    else if( typeof input === 'string' ) {
-        var cursor = 0;
-        var posStart;
-        var posEnd;
-        var output = '';
-        while( true ) {
-            posStart = input.indexOf( '{{', cursor );
-            if( posStart == -1 ) break;
-            output += input.substr( cursor, posStart - cursor );
-            cursor = posStart + 2;
-            posEnd = input.indexOf( '}}', cursor );
-            if( posEnd == -1 ) break;
-            output += Data.get( input.substr( cursor, posEnd - cursor ).trim() );
-            cursor = posEnd + 2;
-        }
-        return output + input.substr( cursor );
-    }
-
-    return undefined;
+    return Data.parse( input );
 }
+

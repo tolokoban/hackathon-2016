@@ -1,6 +1,7 @@
 /**********************************************************************
  **********************************************************************/
 var $ = require("dom");
+var Data = require("data");
 var Hash = require("tfw.hash-watcher");
 var Actions = require("actions");
 var PerformActions = require('app.perform-actions');
@@ -13,11 +14,6 @@ var WDG = {
     appBody: $.get( '#APP-BODY' )
 };
 
-/*
-if( location.hash.length < 2 ) {
-    location.hash = "#main";
-}
-*/
 
 Hash( function( actionID ) {
     var action = Actions[actionID];
@@ -37,6 +33,8 @@ Hash( function( actionID ) {
         case 'app': actionApp( children ); break;
         case 'msg': actionMsg( children ); break;
     }
+
+    $.get( '#HEADER' ).innerHTML = Data.parse( "Open Hackathon 2016 - Team 3 - <b>{{today|date}}</b>" );
 });
 
 
