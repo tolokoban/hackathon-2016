@@ -1,7 +1,7 @@
 # hackathon-2016
 
 This is the demonstration we could show at the Geneva Hackathon 2016.
-See the result [here](http://tolokoban.github.io/hackathon-2016/).
+You can [see the result here](http://tolokoban.github.io/hackathon-2016/#main).
 
 ## Prerequisites
 
