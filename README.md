@@ -69,6 +69,7 @@ But relationships between actions can be more complex.
 
 Here is an example of management of a list of appointments. The following schema shows these relationships.
 
+![Relationships between actions](img/graph.dot.png)
 
 
 
