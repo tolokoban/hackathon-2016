@@ -8,6 +8,14 @@ var MONTHES = [ 'January', 'February', 'March', 'April',
                 'May', 'June', 'July', 'August',
                 'September', 'October', 'November', 'December' ];
 
+exports.log = function( prettyprint) {
+    if( prettyprint ) {
+        console.info("[data] DATA=...", JSON.stringify( DATA, null, '  ' ));
+    } else {
+        console.info("[data] DATA=...", DATA);
+    }
+};
+
 exports.get = function( name ) {
     var data = DATA;
     var path = explodePath( name );
@@ -15,7 +23,7 @@ exports.get = function( name ) {
     var key;
     var i;
     for( i=0 ; i<path.length ; i++ ) {
-        item = path[i];        
+        item = path[i];
         data = data[item.name];
         if( typeof data === 'undefined' ) return undefined;
         if( Array.isArray( data ) && item.index ) {
@@ -33,24 +41,49 @@ exports.get = function( name ) {
     return data;
 };
 
-
 exports.set = function( name, value ) {
+    if( typeof value === 'undefined' ) value = '';
+
+    // Values are always copied.
+    // This avoid cyclic problems.
+    value = JSON.parse( JSON.stringify( value ) );
+    
     checkValueArrays( value );
 
     var data = DATA;
     var path = explodePath( name );
+    var next;
+    var item;
+    var key;
     var i;
     for( i=0 ; i<path.length - 1 ; i++ ) {
-        if( typeof data[path[i].name] === 'undefined' ) {
-            data[path[i].name] = {};
+        item = path[i];
+        if( typeof data[item.name] === 'undefined' ) {
+            if( path.index ) {
+                data[item.name] = [{ $key: exports.get( item.index ) }];
+            } else {
+                data[item.name] = {};
+            }
         }
-        data = data[path[i].name];
+        data = data[item.name];
+        if( item.index ) {
+            key = exports.get( item.index );
+            next = data.find(function( elem ) {
+                return elem.$key == key;
+            });
+            if( typeof next === 'undefined' ) {
+                data.push({ $key: key });
+            } else {
+                data = next;
+            }
+        }
     }
     data[path.pop().name] = value;
 };
 
+
 exports.reset = function() {
-    data = {};
+    DATA = {};
     exports.save();
 };
 
@@ -153,8 +186,27 @@ exports.push = function( name, value ) {
         return 0;
     }
     checkValueArrays( arr );
+    if( typeof value !== 'object' || Array.isArray( value )) {
+        value = { value: value };
+    }
     value.$key = arr.$key++;
+    arr.push( value );
     return value.$key;
+};
+
+/**
+ * Remove in  array `arrName`  the item  with the  key given  by the
+ * value of `keyName`.
+ */
+exports.remove = function( arrName, keyName ) {
+    var arr = exports.get( arrName );
+    var key = exports.get( keyName );
+    var idx = arr.findIndex(function( item ) {
+        return item.$key == key;
+    });
+    if( idx == -1 ) return false;
+    arr.splice( idx, 1 );
+    return true;
 };
 
 
@@ -172,12 +224,22 @@ function checkValueArrays( value ) {
             // New ID for elements of this array.
             value.$key = 1;
         }
+        var values = [];
         value.forEach(function ( item ) {
+            if( typeof item !== 'object' || Array.isArray( item )) {
+                item = { value: item };
+            }            
             if( typeof item.$key !== 'number' ) {
                 item.$key = value.$key++;
             }
             checkValueArrays( item );
+            values.push( item );
         });
+        value.splice( 0, value.length );
+        values.forEach(function ( item ) {
+            value.push( item );
+        });
+
     }
     else if( typeof value === 'object' ) {
         var key;
@@ -211,7 +273,7 @@ function explodePath( name ) {
     var path = [];
     var pathItem;
     var c;
-    
+
     for( cursor = 0 ; cursor < name.length ; cursor++ ) {
         c = name.charAt( cursor );
         if( mode == 0 ) {

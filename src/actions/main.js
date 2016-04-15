@@ -1,10 +1,18 @@
-["demo", [
+["story", [
     ["reset", { 
-        today: 20160501,
+        $today: 201605010930,
         firstname: "Homer",
-        lastname: "Broken"
+        lastname: "Broken",
+        appointments: [
+            { date: 201605031500, text: "See my GP for pain." },
+            { date: 201605131700, text: "Surgery." },
+            { date: 201605080800, text: "X-Ray." }
+        ],
+        tmp: []
     }],
-    ["text", "Welcome! Please select a scenario:"],
-    ["button", { text: "Mr {{lastname}} limbs a bit", action: "scenario1" }],
-    ["button", { text: "Miss <i>blabla</i> has <i>blabla</i>", action: "scenario2" }],
+    ["button", { text: "Test appointments list", action: "app-appointments" }],
+    ["button", { text: "Debug", action: function() {
+        debugger;
+        this.push( "tmp", 27 );
+    }}]
 ]]

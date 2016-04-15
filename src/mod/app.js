@@ -16,9 +16,18 @@ var WDG = {
 
 
 Hash( function( actionID, arg1, arg2, arg3 ) {
+    if( actionID == 'refresh' ) {
+        location.hash = arg1;
+        return;
+    }
+    Data.set( "arg0", actionID );
     Data.set( "arg1", arg1 );
     Data.set( "arg2", arg2 );
     Data.set( "arg3", arg3 );
+    console.log( "----------------------------------------" );
+    console.info("[app] actionID=...", actionID);
+    Data.log();
+    
     var action = Actions[actionID];
     if( typeof action === 'undefined' ) {
         console.error( 'Unknown action: "' + actionID + '"' );
@@ -31,13 +40,22 @@ Hash( function( actionID, arg1, arg2, arg3 ) {
     var children = action[1];
 
     document.body.className = type;
-    switch( type ) {
+    try {
+        switch( type ) {
+        case 'story': actionDemo( children ); break;
         case 'demo': actionDemo( children ); break;
         case 'app': actionApp( children ); break;
         case 'msg': actionMsg( children ); break;
+        }
+    }
+    catch( ex ) {
+        console.error( "Error in " + type.toUpperCase() + ":", children );
+        console.error( "Action:", action );
+        alert( "There is an error!" );
     }
 
-    $.get( '#HEADER' ).innerHTML = Data.parse( "Open Hackathon 2016 - Team 3 - <b>{{today|date}}</b>" );
+    $.get( '#HEADER' ).innerHTML = Data.parse( "Open Hackathon 2016 - Team 3 - <b>{{$today|datetime}}</b>" );
+    Data.log();
 });
 
 
