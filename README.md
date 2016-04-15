@@ -3,6 +3,44 @@
 This is the demonstration we could show at the Geneva Hackathon 2016.
 You can [see the result here](http://tolokoban.github.io/hackathon-2016/#main).
 
+# Example
+
+Follows an example of story and how it is implemented with action files.
+
+## s1-start.js
+
+> May 1, 2016 - 15:30  
+> Kilian Jornet is running in the mountain.  
+> But suddenly, he falls and sprains his right ankle.  
+> He returns in his car with a limp.  
+> He launches the APP.
+
+```js
+['story', [
+  // `reset` means that you want fresh data in the APP.
+  ['reset', {
+    'info.firstname': 'Kilian',
+    'info.lastname': 'JORNET',
+    // Data starting with a `$` are demo specific.
+    // `$today` is used to set to current datetime of the current action.
+    // Internally, dates have this format: YYYYMMDDhhmm
+    $today: 201605011530,
+    // `$next` is the action to take when the APP is closed.
+    $next: "s1-back-to-home"
+  }],
+  // `text` is free HTML.
+  // Double curlies are used to insert data.
+  // `|datetime` format a date in a human readable way.
+  ['text', '<b>{{today|datetime}}</b>'],
+  ['text', '{{info.firstname}} {{info.lastname}} is running in the mountain.'],
+  ['text', 'But suddenly, he falls and sprains his right ankle.'],
+  ['text', 'He returns in his car with a limp.'],
+  ['button', { text: 'He launches the APP', action: 'app' }],
+]]
+```
+
+
+
 ## Prerequisites
 
 First of all you need to install this:
@@ -41,30 +79,3 @@ npm run debug
 
 Now you start working on the sources and view the result in a browser at this URL: [http://localhost/]
 
-# Example
-
-Follows an example of story and how it is implemented with action files.
-
-## s1-start.js
-
-> May 1, 2016 - 15:30  
-> Kilian Jornet is running in the mountain.  
-> But suddenly, he falls and sprains his right ankle.  
-> He returns in his car with a limp.  
-> He launches the APP.
-
-```js
-['story', [
-  ['reset', {
-    // Internally, dates have this format: YYYYMMDDhhmm
-    today: 201605011530,
-    'info.firstname': 'Kilian',
-    'info.lastname': 'JORNET',
-  }],
-  ['text', '<b>{{today|datetime}}</b>'],
-  ['text', '{{info.firstname}} {{info.lastname}} is running in the mountain.'],
-  ['text', 'But suddenly, he falls and sprains his right ankle.'],
-  ['text', 'He returns in his car with a limp.'],
-  ['button', { text: 'He launches the APP', action: 'app' }],
-]]
-```
