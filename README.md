@@ -47,13 +47,13 @@ Follows an example of story and how it is implemented with action files.
 
 ## s1-start.js
 
-> May 1, 2016 - 15:30
-> Kilian Jornet is running in the mountain.
-> But suddenly, he falls and sprains his right ankle.
-> He returns in his car with a limp.
+> May 1, 2016 - 15:30  
+> Kilian Jornet is running in the mountain.  
+> But suddenly, he falls and sprains his right ankle.  
+> He returns in his car with a limp.  
 > He launches the APP.
 
-```
+```js
 ['story', [
   ['reset', {
     // Internally, dates have this format: YYYYMMDDhhmm
