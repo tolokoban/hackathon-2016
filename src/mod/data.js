@@ -83,7 +83,16 @@ exports.set = function( name, value ) {
 
 
 exports.reset = function() {
-    DATA = {};
+    var arg0 = DATA.arg0;
+    var arg1 = DATA.arg1;
+    var arg2 = DATA.arg2;
+    var arg3 = DATA.arg3;
+    DATA = {
+        arg0: arg0,
+        arg1: arg1,
+        arg2: arg2,
+        arg3: arg3
+    };
     exports.save();
 };
 
