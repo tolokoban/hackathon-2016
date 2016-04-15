@@ -3,17 +3,18 @@
 This is the demonstration we could show at the Geneva Hackathon 2016.
 You can [see the result here](http://tolokoban.github.io/hackathon-2016/#main).
 
-# Example
+# Example from the story point of view
 
 Follows an example of story and how it is implemented with action files.
-
-## s1-start.js
 
 > May 1, 2016 - 15:30  
 > Kilian Jornet is running in the mountain.  
 > But suddenly, he falls and sprains his right ankle.  
 > He returns in his car with a limp.  
 > He launches the APP.
+
+
+__`s1-start.js`__
 
 ```js
 ['story', [
