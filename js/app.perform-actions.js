@@ -1,7 +1,7 @@
 require( 'app.perform-actions', function(exports, module) {  /**********************************************************************
  require( 'app.perform-actions' )
  -----------------------------------------------------------------------
- 
+
  **********************************************************************/
 var $ = require("dom");
 var Data = require('data');
@@ -15,26 +15,42 @@ var InputDate = require("input-date");
 module.exports = function( children ) {
     var body = $.div();
 
-    children.forEach(function ( child, idx ) {
-        if( !Array.isArray( child ) ) {
-            console.error( "Element #" + idx + " should be an array!" );
-            console.info("[app.perform-actions] child=...", child);
-            console.info("[app.perform-actions] children=...", children);
+    try {
+        if( typeof children === 'undefined' ) {
+            throw( "children is undefined! But it must be an Array." );
         }
-        var actionID = child[0];
-        var action = actions[actionID];
-        if( action ) {
-            var element = action.apply( body, child.slice( 1 ) );
-            if( typeof element === 'string' ) {
-                location.hash = '#' + element;
-                return;
+        children.forEach(function ( child, idx ) {
+            try {
+                if( !Array.isArray( child ) ) {
+                    throw( "Element #" + idx + " should be an array!" );
+                }
+                var actionID = child[0];
+                var action = actions[actionID];
+                if( action ) {
+                    var element = action.apply( body, child.slice( 1 ) );
+                    if( typeof element === 'string' ) {
+                        location.hash = '#' + element;
+                        return;
+                    }
+                    if( element ) body.appendChild( element );
+                } else {
+                    throw "Unknonw type `" + actionID + "`!";
+                }
             }
-            if( element ) body.appendChild( element );
-        } else {
-            throw "Unknonw type `" + actionID + "`!";
+            catch( ex ) {
+                console.error( "Exception: ", ex );
+                console.error( "Child #" + idx, child );
+                throw( null );
+            }
+        }, this);
+    }
+    catch( ex ) {
+        if( ex !== null ) {
+            console.error( "Exception: ", ex );
         }
-    });
-
+        console.error( "Error in: ", children );
+        throw( ex );
+    }
     return body;
 };
 
@@ -84,7 +100,7 @@ var actions = {
         var key, val;
         for( key in args ) {
             val = args[key];
-            Data.set( key, val );
+            Data.set( key, parse( val ) );
         }
     },
     "input-bool": function( args ) {
@@ -99,11 +115,22 @@ var actions = {
     "input-date": function( args ) {
         return InputDate( args );
     },
+    row: function( args ) {
+        var tbl = $.div( 'tbl' );
+        if( !Array.isArray( args ) ) args = [args];
+        args.forEach(function ( arg ) {
+            var body = module.exports( [arg] );
+            $.add( tbl, $.div([ body ], {
+                style: "width:" + (100 / args.length) + "%"
+            }));            
+        });
+        return tbl;
+    },
     loop: function( args, children ) {
         var list = parse( args.list );
         var item = parse( args.item );
         var sort = parse( args.sort );
-        
+
         var arr = Data.get( list );
         if( !Array.isArray( arr ) ) arr = [arr];
 
@@ -142,5 +169,4 @@ var actions = {
 function parse( input, context ) {
     return Data.parse( input, context );
 }
-
  });
