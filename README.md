@@ -62,6 +62,14 @@ We don't describe here the `app.js` file which is about the APP. Just focus on t
 
 That's all that need to be known for story makers.
 
+# Example from the APP point of view
+
+Working on the APP part is similar to the work on the STORY part.
+But relationships between actions can be more complex.
+
+Here is an example of management of a list of appointments. The following schema shows these relationships.
+
+
 
 
 ## Prerequisites
