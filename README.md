@@ -14,14 +14,15 @@ Follows an example of story and how it is implemented with action files.
 > He launches the APP.
 
 
-__`s1-start.js`__
-
 ```js
+// File: "s1-start.js"
 ['story', [
   // `reset` means that you want fresh data in the APP.
   ['reset', {
     'info.firstname': 'Kilian',
     'info.lastname': 'JORNET',
+    // Let's define an empty list of appointments.
+    appointments: [],
     // Data starting with a `$` are demo specific.
     // `$today` is used to set to current datetime of the current action.
     // Internally, dates have this format: YYYYMMDDhhmm
@@ -39,6 +40,27 @@ __`s1-start.js`__
   ['button', { text: 'He launches the APP', action: 'app' }],
 ]]
 ```
+
+We don't describe here the `app.js` file which is about the APP. Just focus on the story point of view.
+
+> May 1, 2016 - 17:45  
+> Kilian call his doctor and get an appointment for tomorrow 9:00 AM.
+> He registers this appointment in his APP.
+
+```js
+['story', [
+  // Using `set` instead of `reset` will add new data, but doesn't reset the existing data.
+  ['set', {
+    $today: 201605011745,
+    $next: "s1-next"
+  }],
+  ['text', '<b>{{today|datetime}}</b>'],
+  ['text', '{{info.firstname}}  call his doctor and get an appointment for tomorrow 9:00 AM.'],
+  ['button', { text: "He registers this appointment in his APP.", action: 'app' }]
+]]
+```
+
+That's all that need to be known for story makers.
 
 
 
