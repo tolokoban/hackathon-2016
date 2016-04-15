@@ -2,11 +2,11 @@ exports.config={
     name:"hackathon-2016",
     description:"Stuff for the Open Geneva Hackathon in 2016",
     author:"Tolokoban",
-    version:"0.0.1",
+    version:"0.0.7",
     major:0,
     minor:0,
-    revision:1,
-    date:new Date(2016,3,1,19,54,30)
+    revision:7,
+    date:new Date(2016,3,15,13,49,35)
 };
 var currentLang = null;
 exports.lang = function(lang) {

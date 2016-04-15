@@ -1,0 +1,2 @@
+require("input-date",function(e,t){var a=require("dom"),r=require("data");t.exports=function(e){var t=a.tag("input",{type:"datetime",placeholder:"YYYYMMDDhhmm"}),d=a.tag("label","text",[a.div([e.text]),t]);return"undefined"!=typeof r.get(e.data)&&(t.value=r.get(e.data)),t.addEventListener("blur",function(){r.set(e.data,t.value),r.save()}),d}});
+//# sourceMappingURL=input-date.js.map

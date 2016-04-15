@@ -5,11 +5,11 @@ div.boolean {
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: right 4px center;
-    background-image: url(main/0.png);
+    background-image: url(app/0.png);
     background-color: #fee;
 }
 
 div.boolean.yes {
-    background-image:    url(main/1.png);
+    background-image:    url(app/1.png);
     background-color: #efe;
 }

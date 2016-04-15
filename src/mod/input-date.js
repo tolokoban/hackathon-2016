@@ -3,7 +3,7 @@ var Data = require("data");
 
 
 module.exports = function( args ) {
-    var input = $.tag( 'input', { type: 'datetime' } );
+    var input = $.tag( 'input', { type: 'datetime', placeholder: "YYYYMMDDhhmm" } );
     var elem = $.tag( 'label', 'text', [
         $.div([ args.text ]),
         input

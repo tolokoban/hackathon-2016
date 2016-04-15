@@ -1,2 +1,0 @@
-require("main",function(e,r){require("tp4.button"),require("page-new"),require("page-lost");require("dom"),require("x-widget"),require("md5"),require("tfw.storage").local,require("page-user"),require("page-event"),require("page-user-edit")});
-//# sourceMappingURL=main.js.map
