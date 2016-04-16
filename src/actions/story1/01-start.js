@@ -8,5 +8,5 @@
         appointments: []
     }],
     ['text', "Patient felt pain.<br/> Patient took an appointment wih GP.<br/> GP referred patient to consult surgeon.</br> Patient took appointment with surgeon"],
-    ['button', { text: 'App', action: "app:start" }]
+    ['button', { text: '{{dg.firstname}} opens its App', action: "app:start" }]
 ]]
