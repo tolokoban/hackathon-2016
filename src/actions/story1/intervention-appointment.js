@@ -1,7 +1,7 @@
 ['story', [
     ["set", {
-        $next: ""
+        $next: "anaestethist-appointment"
     }],
-    ['text', "Patient takes "],
- ['button', { text: 'App', action: "app:start" }]
+    ['text', "Patient takes the appointment for the intervention "],
+ ['button', { text: 'App', action: "app:start" }],
 ]]
