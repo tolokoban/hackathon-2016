@@ -10,6 +10,7 @@ var InputBool = require("input-boolean");
 var InputText = require("input-text");
 var InputFile = require("input-file");
 var InputDate = require("input-date");
+var InputSelect = require("input-select");
 
 
 module.exports = function( children ) {
@@ -109,6 +110,9 @@ var actions = {
     },
     "input-text": function( args ) {
         return InputText( args );
+    },
+    "input-select": function( args ) {
+        return InputSelect( args );
     },
     "input-file": function( args ) {
         return InputFile( args );
