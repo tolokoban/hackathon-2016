@@ -7,7 +7,7 @@
     ['input-date', { data: 'tmp.apt.date', text: 'Date' }],
     ['input-text', { data: 'tmp.apt.reason', text: 'Reason' }],
     ['input-text', { data: 'tmp.apt.xxx', text: 'Specialist' }],
-    ['input-file', { data: 'tmp.apt.xxx', text: 'Attachment...' }],
+    ['input-file', { data: 'tmp.apt.xxx', text: 'Attachments' }],
     ['row', [
         ['button', { text: "Add", action: [
             function() {
