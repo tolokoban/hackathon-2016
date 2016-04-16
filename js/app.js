@@ -15,7 +15,9 @@ var WDG = {
 };
 
 $.on( $.get( "#CLOSE" ), function() {
-    location.hash = "#" + data.get( '$next' );
+    var next = Data.get( '$next' );
+    console.info("[app] next=...", next);
+    location.hash = "#" + next;
 });
 
 
