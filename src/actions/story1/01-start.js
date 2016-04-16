@@ -1,6 +1,6 @@
 ['story', [
     ["reset", {
-        $next: "story1:surgeon-first-meeting",
+        $next: "story1:02-surgeon-first-meeting",
         dg: {
             firstname: "Homer",
             lastname: "Simpson"
