@@ -198,12 +198,28 @@ exports['scenario1'] = ['demo', [
     ['button', { text: "He looks at his pHM&trade; app", action: "s1-app1" }]
 ]]
 
-exports['story1:prescriptions-appointments'] = [['story'], [
+exports['story1:blood-appointment'] = ['story', [
     ["set", {
-        $next: ""
+        $next: "second-meeting-surgeon"
+    }],
+    ['text', "Patient takes an appointment for blood tests"]],
+ ['button', { text: 'App', action: "app:start" }]
+]]
+
+exports['story1:prescriptions-appointments'] = ['story', [
+    ["set", {
+        $next: "radiology-apointment"
     }],
     ['text', "Appointments are made for radio, blood..."],
     ['button', { text: "APP", action: "app:start" }]
+]]
+
+exports['story1:radiology-appointment'] = ['story', [
+    ["set", {
+        $next: "blood-appointment"
+    }],
+    ['text', "Patient takes a radiology appointment"]],
+ ['button', { text: 'App', action: "app:start" }]
 ]]
 
 exports['story1:start'] = ['story', [
