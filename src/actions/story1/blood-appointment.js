@@ -1,6 +1,6 @@
 ['story', [
     ["set", {
-        $next: "second-meeting-surgeon"
+        $next: "diagnosis-appointment"
     }],
     ['text', "Patient takes an appointment for blood tests"]],
  ['button', { text: 'App', action: "app:start" }]
