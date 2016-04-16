@@ -157,6 +157,7 @@ body.app #APP {
     right: 0;
     bottom: 0;
     width: 100%;
+    border-radius: 100%;
     height: 15%;
     cursor: pointer;
 }
