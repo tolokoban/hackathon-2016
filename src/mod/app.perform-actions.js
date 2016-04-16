@@ -76,6 +76,7 @@ var actions = {
         $.on( btn, function() {
             var target = parse( args.action, context );
             if( typeof target === 'string' && target.length > 0 ) {
+                console.log( "GOTO: " + target );
                 location.hash = "#" + target;
             }
         });
