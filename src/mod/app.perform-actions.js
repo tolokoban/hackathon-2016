@@ -4,8 +4,9 @@
 
  **********************************************************************/
 var $ = require("dom");
-var Data = require('data');
 var Tpl = require("x-template");
+var Data = require('data');
+var Actions = require("actions");
 var InputBool = require("input-boolean");
 var InputText = require("input-text");
 var InputFile = require("input-file");
@@ -93,6 +94,9 @@ var actions = {
     reset: function( args ) {
         Data.reset();
         var key, val;
+        if( typeof args === 'string' ) {
+            args = Actions[args];
+        }
         for( key in args ) {
             val = args[key];
             Data.set( key, val );
