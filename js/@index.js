@@ -278,6 +278,29 @@ exports['scenario1'] = ['demo', [
     ['button', { text: "He looks at his pHM&trade; app", action: "s1-app1" }]
 ]]
 
+exports['story1:01-start'] = ['story', [
+    ["reset", {
+        $next: "story1:02-surgeon-first-meeting",
+        dg: {
+            firstname: "Homer",
+            lastname: "Simpson"
+        },
+        appointments: []
+    }],
+    ['text', "Patient felt pain.<br/> Patient took an appointment wih GP.<br/> GP referred patient to consult surgeon.</br> Patient took appointment with surgeon. </br> with surgeon."],
+    ['button', { text: 'App', action: "app:start" }]
+]]
+
+exports['story1:02-surgeon-first-meeting'] = ['story', [
+    ["set", {
+        $next: "story1:03-radiology-blood-appointment"
+    }],
+    ['text', "Surgeon provides consultation services and prescribes radio., blood..."],
+    ['text', "Appointments taken for radio, blood..."],
+
+    ['button', { text: "APP", action: "app:start" }]
+]]
+
 exports['story1:admission'] = ['story', [
     ["set", {
         $next: "story1:check-in-surgery"
@@ -292,14 +315,6 @@ exports['story1:anaesthetist-appointment'] = ['story', [
     }],
     ['text', "Patient waits for the anaesthetist to propose the date and time for the consultation appointment  "],
  ['button', { text: 'App', action: "app:start" }],
-]]
-
-exports['story1:blood-appointment'] = ['story', [
-    ["set", {
-        $next: "story1:diagnosis-meeting"
-    }],
-    ['text', "Patient takes an appointment for blood tests"],
- ['button', { text: 'App', action: "app:start" }]
 ]]
 
 exports['story1:check-in-surgery'] = ['story', [
@@ -358,14 +373,6 @@ exports['story1:pre-surgery-anaesthetist-consultation'] = ['story', [
  ['button', { text: 'App', action: "app:start" }],
 ]]
 
-exports['story1:prescriptions-appointments'] = ['story', [
-    ["set", {
-        $next: "story1:radiology-appointment"
-    }],
-    ['text', "Appointments are made for radio, blood..."],
-    ['button', { text: "APP", action: "app:start" }]
-]]
-
 exports['story1:radiology-appointment'] = ['story', [
     ["set", {
         $next: "story1:blood-appointment"
@@ -385,16 +392,6 @@ exports['story1:start'] = ['story', [
     }],
     ['text', "Patient felt pain.<br/> Patient took an appointment wih GP.<br/> GP referred patient to consult surgeon.</br> Patient took appointment with surgeon. </br> with surgeon."],
     ['button', { text: 'App', action: "app:start" }]
-]]
-
-exports['story1:surgeon-first-meeting'] = ['story', [
-    ["set", {
-        $next: "story1:radiology-appointment"
-    }],
-    ['text', "Surgeon provides consultation services and prescribes radio., blood..."],
-    ['text', "Appointments taken for radio, blood..."],
-
-    ['button', { text: "APP", action: "app:start" }]
 ]]
 
 exports['tutorial:app-appointments-add'] = ['app', [
