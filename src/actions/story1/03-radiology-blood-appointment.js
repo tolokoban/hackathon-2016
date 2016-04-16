@@ -1,6 +1,6 @@
 ['story', [
     ["set", {
-        $next: "story1:04-diagnosis-meeting"
+        $next: "story1:04-radiology-blood"
     }],
     ['text', "Patient took a radiology appointment"],
     ['text', "Patient took a blood test appointment"],
