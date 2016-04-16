@@ -60,8 +60,88 @@ addListener(
         document.body.parentNode.$data = {};
         // Attach controllers.
         require('actions', function(exports, module) {
+exports['app:appointments-add'] = ['app', [
+    ['text', '<h1>New appointment</h1>'],
+    ['set', {
+        "tmp.apt.date": "{{$today}}",
+        "tmp.apt.text": ""
+    }],
+    ['input-date', { data: 'tmp.apt.date', text: 'Date' }],
+    ['input-text', { data: 'tmp.apt.text', text: 'Subject' }],
+    ['row', [
+        ['button', { text: "Add", action: [
+            function() {
+                this.push( "appointments", this.get( "tmp.apt" ) );
+            },
+            "appointments"
+        ]}],
+        ['button', { text: "Cancel", action: "appointments" }]
+    ]]
+]]
+
+exports['app:appointments-edit'] = ['app', [
+    ['text', '<h1>Appointment</h1>'],
+    ['input-date', { text: "Date", data: 'appointments[arg1].date' }],
+    ['input-text', { text: "Subject", data: 'appointments[arg1].text' }],
+    ['button', { text: "Back", action: "appointments" }]
+]]
+
+exports['app:appointments-view'] = ['app', [
+    ['text', '<h1>Appointment</h1>'],
+    ['text', '<b>{{appointments[arg1].date|datetime}}</b>'],
+    ['text', '{{appointments[arg1].text}}'],
+    ['row', [
+        ['button', { text: "Edit", action: "appointments-edit/{{arg1}}" }],
+        ['button', {
+            text: "Delete",
+            action: [
+                function() {
+                    this.remove( "appointments", "arg1" );
+                },
+                "appointments"
+            ]
+        }]
+    ]],
+    ['button', { text: "Back", action: "appointments" }]
+]]
+
+exports['app:appointments'] = ['app', [
+    ['text', "<h1>Appointments List</h1>"],
+    ['button', {
+        text: "Add new appointment",
+        action: "appointments-add"
+    }],
+    ['loop', {
+        list: "appointments",
+        item: "tmp.apt",
+        sort: "date",
+        filter: function( item ) {
+            return true; //item.text.indexOf( 'Ray' ) == -1;
+        }
+    }, [
+        ['button', {
+            style: 'box',            
+            text: "<div><b>{{tmp.apt.date|datetime}}</b><br/>{{tmp.apt.text}}</div>",
+            freeze: "tmp.apt.$key",
+            action: "appointments-view/{{tmp.apt.$key}}"
+        }]
+    ]],
+    ['text', '<hr/>'],
+    ['button', { text: "back", action: "app:start" }]
+]]
+
+exports['app:demographic'] = ['app', [
+    ['input-text', { text: "Firstname", data: "dg.firstname" }],
+    ['input-text', { text: "Lastname", data: "dg.lastname" }],
+    ['buton', { text: "OK", data: "app:start" }],
+]]
+
 exports['app:start'] = ['app', [
-    ['button', { text: "Next", action: "{{$next}}" }]
+    ['nurse', "How can I help you {{dg.firstname}} {{dg.lastname}}?"],
+    ['button', { text: "I took an appointment.", action: "appointments" }],
+    ['button', { text: "Edit demographic.", action: "demographic" }],
+    ['button', { text: "I want to send my data.", action: "" }],
+    ['button', { text: "I want to add data.", action: "" }]
 ]]
 
 exports['appointment'] = ['app', [
@@ -198,17 +278,41 @@ exports['scenario1'] = ['demo', [
     ['button', { text: "He looks at his pHM&trade; app", action: "s1-app1" }]
 ]]
 
+exports['story1:admission'] = ['story', [
+    ["set", {
+        $next: "story1:check-in-surgery"
+    }],
+    ['text', " Prepare for the admission (for patient service) "],
+ ['button', { text: 'App', action: "app:start" }],
+]]
+
+exports['story1:anaesthetist-appointment'] = ['story', [
+    ["set", {
+        $next: "story1:pre-surgery-anaesthetist-consultation"
+    }],
+    ['text', "Patient waits for the anaesthetist to propose the date and time for the consultation appointment  "],
+ ['button', { text: 'App', action: "app:start" }],
+]]
+
 exports['story1:blood-appointment'] = ['story', [
     ["set", {
-        $next: "diagnosis-appointment"
+        $next: "story1:diagnosis-meeting"
     }],
     ['text', "Patient takes an appointment for blood tests"],
  ['button', { text: 'App', action: "app:start" }]
 ]]
 
-exports['story1:diagnosis-appointment'] = ['story', [
+exports['story1:check-in-surgery'] = ['story', [
     ["set", {
-        $next: "physiotherapy-appointment"
+        $next: ""
+    }],
+    ['text', " Check in surgery "],
+ ['button', { text: 'App', action: "app:start" }],
+]]
+
+exports['story1:diagnosis-meeting'] = ['story', [
+    ["set", {
+        $next: "story1:physiotherapy-appointment"
     }],
     ['text', "Surgeon provides the diagnosis and prescribes the intervention, the treatment and the physiotherapy"],
  ['button', { text: 'App', action: "app:start" }]
@@ -216,7 +320,7 @@ exports['story1:diagnosis-appointment'] = ['story', [
 
 exports['story1:intervention-appointment'] = ['story', [
     ["set", {
-        $next: "anaestethist-appointment"
+        $next: "story1:anaesthetist-appointment"
     }],
     ['text', "Patient takes the appointment for the intervention "],
  ['button', { text: 'App', action: "app:start" }],
@@ -224,7 +328,7 @@ exports['story1:intervention-appointment'] = ['story', [
 
 exports['story1:physiotherapy-appointment'] = ['story', [
     ["set", {
-        $next: "physiotherapy-meeting"
+        $next: "story1:physiotherapy-meeting"
     }],
     ['text', "Patient takes the appointment for the consultation with the physiotherapist "],
  ['button', { text: 'App', action: "app:start" }]
@@ -232,15 +336,31 @@ exports['story1:physiotherapy-appointment'] = ['story', [
 
 exports['story1:physiotherapy-meeting'] = ['story', [
     ["set", {
-        $next: "intervention-appointment"
+        $next: "story1:intervention-appointment"
     }],
     ['text', "Physiotherapist proposes the therapy "],
  ['button', { text: 'App', action: "app:start" }]
 ]]
 
+exports['story1:pre-admission-testing'] = ['story', [
+    ["set", {
+        $next: "story1:admission"
+    }],
+    ['text', " Do the pre-admission testing "],
+ ['button', { text: 'App', action: "app:start" }],
+]]
+
+exports['story1:pre-surgery-anaesthetist-consultation'] = ['story', [
+    ["set", {
+        $next: "story1:pre-admission-testing"
+    }],
+    ['text', " Pre surgery consultation with the anaesthetist "],
+ ['button', { text: 'App', action: "app:start" }],
+]]
+
 exports['story1:prescriptions-appointments'] = ['story', [
     ["set", {
-        $next: "radiology-appointment"
+        $next: "story1:radiology-appointment"
     }],
     ['text', "Appointments are made for radio, blood..."],
     ['button', { text: "APP", action: "app:start" }]
@@ -248,25 +368,32 @@ exports['story1:prescriptions-appointments'] = ['story', [
 
 exports['story1:radiology-appointment'] = ['story', [
     ["set", {
-        $next: "blood-appointment"
+        $next: "story1:blood-appointment"
     }],
     ['text', "Patient takes a radiology appointment"],
  ['button', { text: 'App', action: "app:start" }]
 ]]
 
 exports['story1:start'] = ['story', [
-    ["set", {
-        $next: "story1:surgeon-first-meeting"
+    ["reset", {
+        $next: "story1:surgeon-first-meeting",
+        dg: {
+            firstname: "Homer",
+            lastname: "Simpson"
+        },
+        appointments: []
     }],
-    ['text', "Patient feels pain.<br/> Patient takes an appointment wih GP.<br/> PAtient takes appt with surgeaon."],
- ['button', { text: 'App', action: "app:start" }]
+    ['text', "Patient felt pain.<br/> Patient took an appointment wih GP.<br/> GP referred patient to consult surgeon.</br> Patient took appointment with surgeon. </br> with surgeon."],
+    ['button', { text: 'App', action: "app:start" }]
 ]]
 
 exports['story1:surgeon-first-meeting'] = ['story', [
     ["set", {
-        $next: "prescriptions-appointments"
+        $next: "story1:radiology-appointment"
     }],
     ['text', "Surgeon provides consultation services and prescribes radio., blood..."],
+    ['text', "Appointments taken for radio, blood..."],
+
     ['button', { text: "APP", action: "app:start" }]
 ]]
 
