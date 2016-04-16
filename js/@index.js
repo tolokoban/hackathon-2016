@@ -214,17 +214,33 @@ exports['story1:diagnosis-appointment'] = ['story', [
  ['button', { text: 'App', action: "app:start" }]
 ]]
 
+exports['story1:intervention-appointment'] = ['story', [
+    ["set", {
+        $next: "anaestethist-appointment"
+    }],
+    ['text', "Patient takes the appointment for the intervention "],
+ ['button', { text: 'App', action: "app:start" }],
+]]
+
 exports['story1:physiotherapy-appointment'] = ['story', [
     ["set", {
         $next: "physiotherapy-meeting"
     }],
-    ['text', ""]],
+    ['text', "Patient takes the appointment for the consultation with the physiotherapist "],
+ ['button', { text: 'App', action: "app:start" }]
+]]
+
+exports['story1:physiotherapy-meeting'] = ['story', [
+    ["set", {
+        $next: "intervention-appointment"
+    }],
+    ['text', "Physiotherapist proposes the therapy "],
  ['button', { text: 'App', action: "app:start" }]
 ]]
 
 exports['story1:prescriptions-appointments'] = ['story', [
     ["set", {
-        $next: "radiology-apointment"
+        $next: "radiology-appointment"
     }],
     ['text', "Appointments are made for radio, blood..."],
     ['button', { text: "APP", action: "app:start" }]
@@ -234,7 +250,7 @@ exports['story1:radiology-appointment'] = ['story', [
     ["set", {
         $next: "blood-appointment"
     }],
-    ['text', "Patient takes a radiology appointment"]],
+    ['text', "Patient takes a radiology appointment"],
  ['button', { text: 'App', action: "app:start" }]
 ]]
 

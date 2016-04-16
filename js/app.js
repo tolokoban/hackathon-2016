@@ -14,7 +14,7 @@ var WDG = {
     appBody: $.get( '#APP-BODY' )
 };
 
-$.on( $.get( "CLOSE" ), function() {
+$.on( $.get( "#CLOSE" ), function() {
     location.hash = "#" + data.get( '$next' );
 });
 
