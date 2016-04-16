@@ -1,4 +1,4 @@
-['story'], [
+['story', [
     ["set", {
         $next: "prescriptions-appointments"
     }],

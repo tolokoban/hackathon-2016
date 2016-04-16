@@ -10,6 +10,5 @@
         ],
         tmp: []
     }],
-    ["button", { text: "Test appointments list", action: "app-appointments" }],
-    ["button", { text: "Tutorial", action: "tutorial:start" }]
+    ["button", { text: "Surgery scenario", action: "story1:start" }]
 ]]
