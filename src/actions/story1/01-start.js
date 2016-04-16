@@ -1,5 +1,6 @@
 ['story', [
     ["reset", {
+        $today: 201605011200,
         $next: "story1:02-surgeon-first-meeting",
         dg: {
             firstname: "Homer",

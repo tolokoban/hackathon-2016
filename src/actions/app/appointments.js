@@ -1,9 +1,13 @@
 ['app', [
-    ['text', "<h1>Appointments List</h1>"],
+    ['text', "<h1>Appointments</h1>"],
+/*
     ['button', {
         text: "Add new appointment",
         action: "appointments-add"
     }],
+*/
+    ['button', { text: "Next appointments", action: "app:start" }],
+    ['button', { text: "Past appointments", action: "app:start" }],
     ['loop', {
         list: "appointments",
         item: "tmp.apt",
