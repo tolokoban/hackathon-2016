@@ -147,6 +147,19 @@ body.app #APP {
     cursor: pointer;
 }
 
+#CLOSE:hover {
+    background: red;
+}
+
+#CLOSE {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    cursor: pointer;
+}
 
 #APP-BODY a.box {
     display: block;

@@ -14,6 +14,10 @@ var WDG = {
     appBody: $.get( '#APP-BODY' )
 };
 
+$.on( $.get( "CLOSE" ), function() {
+    location.hash = "#" + data.get( '$next' );
+});
+
 
 Hash( function( actionID, arg1, arg2, arg3 ) {
     if( actionID == 'refresh' ) {
