@@ -10,5 +10,5 @@
         ],
         tmp: []
     }],
-    ["button", { text: "Surgery scenario", action: "story1:start" }]
+    ["button", { text: "Surgery scenario", action: "story1:01-start" }]
 ]]
