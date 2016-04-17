@@ -1,0 +1,23 @@
+{surgeryCheckList:
+  ['button', {text:'Personal Information', child: [
+    ]}
+  ]
+  ['button', {text:'Physiotherapy Information', child:
+    ['button', {text:'Instructions for pre- and post-surgery preparation'}]
+    ['button', {text:'Plan for pre-surgery preparation'}]
+    ['button', {text:'Plan for post-surgery preparation'}]
+  }]
+  ['button', {text:'Pre-anesthetic Assessment', child:
+    ['checkbox', {text:'Patient history', P: false, D: true}, 
+  
+  
+  
+  
+  }],
+  ['button', {text:'Useful Information', action:'app:usefulInformation'}],
+  ['checkbox', {text:'Modification of health', P: true, D: false}, [ 
+    ['textarea', {P: true}]
+  ]
+}
+/*  P == Patient's Portal, D == Doctor's Portal
+    Field access rights: RW == true, R == false
