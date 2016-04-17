@@ -32,7 +32,8 @@ var InputDescription = function( options ) {
     var footer = DOM.tag( 'footer', [
         Btn.create({ caption: "Edit " + options.label }).Tap( this.fireEdit.bind( this ) ).element()
     ]);
-    this.append( header, section, footer );
+    this.append( header, section/*, footer*/ );
+    this.Tap( this.fireEdit.bind( this ) );
 
     this._section = section;
     if( typeof this._data === 'string' ) {

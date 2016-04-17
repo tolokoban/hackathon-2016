@@ -1,17 +1,23 @@
 <h1>Confirm an appointment</h1>
 
+<x-widget name="input-text" $label="Your name" id="apt-add-name" />
+<x-widget name="input-text" $label="Speciality" id="apt-add-specialist" />
+
 <x-row dir="H" fullwidth>
-    <x-widget name="tp4.select" $label="Type" $data="tmp.type"
-              $options='{"anaesthesia":"Anaesthesia","hipsurgery":"Hip Surgery","other":"Other"}' />
-    <x-widget name="tp4.input-date" $label="Date / Time" $data="tmp.datetime" />
+    <x-widget name="tp4.select" $label="Type" id="apt-add-type"
+              $options='{"notdef":"Not defined","anaesthesia":"Anaesthesia","hipsurgery":"Hip Surgery","other":"Other"}' />
+    <x-widget name="tp4.input-date" $label="Date / Time" id="apt-add-date" />
 </x-row>
 
 <br/>
 
-<x-widget name="input-text" $label="Reason" $data="tmp.reason" />
-<x-widget name="input-text" $label="Location" $data="tmp.location" />
-<x-widget name="tp4.input-desc" $label="Additional comments" $data="tmp.comments" />
+<x-widget name="input-text" $label="Reason" id="apt-add-reason" />
+<x-widget name="input-text" $label="Location" id="apt-add-location" />
+<x-widget name="tp4.input-desc" $label="Additional comments" id="apt-add-comments" />
 
 <br/>
 
-<center><x-widget name="button" $caption="Confirm" $action="onAddApt"/></center>
+<x-row dir="H" fullwidth>
+    <x-widget name="button" $class="warning" $autofocus $caption="Cancel" $href="#/book/portal"/>
+    <x-widget name="button" $caption="Confirm" $action="onAddApt"/>
+</x-row>

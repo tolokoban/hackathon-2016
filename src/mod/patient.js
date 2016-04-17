@@ -99,12 +99,20 @@ exports.onActivatePortalOpen = function( md5 ) {
 
 exports.onAddApt = function() {
     var apt = {
-        type: Data.get( "tmp.type" ),
-        reason: Data.get( "tmp.reason" ),
-        date: Data.get( "tmp.date" ),
-        comment: Data.get( "tmp.comment" ),
-        location: Data.get( "tmp.location" )
+        type: Wdg.getById( "apt-add-type" ).val(),
+        name: Wdg.getById( "apt-add-name" ).val(),
+        specialist: Wdg.getById( "apt-add-specialist" ).val(),
+        reason: Wdg.getById( "apt-add-reason" ).val(),
+        date: Wdg.getById( "apt-add-date" ).YMDhms(),
+        comment: Wdg.getById( "apt-add-comments" ).val(),
+        location: Wdg.getById( "apt-add-location" ).val()
     };
 console.info("[patient] apt=...", apt);
     Data.push( "appointments", apt );
+console.info("[patient] Data.data=...", Data.data());
+    APP.waitOn();
+    Data.save(function() {
+        APP.waitOff();
+        location.hash = "#/book/portal";
+    });
 };

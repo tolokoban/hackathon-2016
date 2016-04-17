@@ -2,7 +2,7 @@
     <x-central-box id="x-central-box" width="600" height="800" cols="20">
         <x-book hash="book" scroll>
             <main scroll data-activate="onActivateMain"><x-include src="main.htm"/></main>
-            <lockscreen><x-include src="lockscreen.htm"/></lockscreen>
+            <!-- The Patient side -->
             <how-to-flash><x-include src="how-to-flash.htm"/></how-to-flash>
             <lost><x-include src="lost.htm"/></lost>
             <new><x-include src="new.htm"/></new>
@@ -12,23 +12,13 @@
             <portal-open scroll data-activate="onActivatePortalOpen">
                 <x-include src="portal-open.htm"/>
             </portal-open>
+
+            <!-- The Doctor side -->
             <portal data-activate="onActivatePortal" scroll><x-include src="portal.htm"/></portal>
             <portal-apt-add scroll>
                 <x-include src="portal-apt-add.htm"/>
             </portal-apt-add>
 
-
-            <event scroll data-activate="onActivateEvent"><x-include src="event.htm"/></event>
-            <dentist><x-include src="dentist.htm"/></dentist>
-            <dentist-found><x-include src="dentist-found.htm"/></dentist-found>
-
-            <registration><x-include src="registration.htm"/></registration>
-
-            <registration-1><x-include src="registration-1.htm"/></registration-1>
-            <registration1><x-include src="registration1.htm"/></registration1>
-            <registration2><x-include src="registration2.htm"/></registration2>
-
-            <report><x-include src="report.htm"/></report>
         </x-book>
     </x-central-box>
 
