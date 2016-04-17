@@ -25,11 +25,12 @@ AptList.prototype.constructor = AptList;
  * @return void
  */
 AptList.prototype.refresh = function() {
+    this.clear();
     var appointments = Data.get( "appointments" );
-console.info("[apt-list] appointments=...", appointments);
+    console.info("[apt-list] appointments=...", appointments);
     appointments.forEach(function ( apt ) {
         this.addApt( apt, this._args.action );
-    }, this);    
+    }, this);
 };
 
 
@@ -41,20 +42,13 @@ AptList.prototype.addApt = function( apt, action ) {
     var dat = Data.num2dat( apt.date );
     div.append(
         D( 'date' ).text( dat.getDate() + "/" + (dat.getMonth() + 1) + "/" + dat.getFullYear()
-                        + " - " + dat.getHours() + ":" + dat.getMinutes()),
+                          + " - " + dat.getHours() + ":" + dat.getMinutes()),
         D( 'specialist' ).text( apt.specialist ),
         D( 'name' ).text( apt.name )
     );
-    if( typeof action === 'string' ) {
-        div.Tap( function() {
-            var slot = APP[action];
-            if( typeof slot !== 'function' ) {
-                console.error( "APP[" + action + "] not found!" );
-            } else {
-                slot( apt.$key );
-            }
-        });
-    }
+    div.Tap( function() {
+        window.location = "#/book/apt-view/" + apt.$key;
+    });
     this.append( div );
 };
 

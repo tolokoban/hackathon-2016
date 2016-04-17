@@ -114,7 +114,7 @@ exports.load = function( id, onLoaded ) {
             console.error( err );
         }
     );
-    
+
 };
 
 exports.save = function() {
@@ -241,6 +241,17 @@ exports.remove = function( arrName, keyName ) {
 };
 
 
+exports.removeByKey = function( arrName, key ) {
+    var arr = exports.get( arrName );
+    var idx = arr.findIndex(function( item ) {
+        return item.$key == key;
+    });
+    if( idx == -1 ) return false;
+    arr.splice( idx, 1 );
+    return true;
+};
+
+
 
 /**
  * In  an array,  each item  must have  the `$key'  property. This  is
@@ -350,3 +361,10 @@ function explodePath( name ) {
 
     return path;
 }
+
+
+exports.formatDate = function( num ) {
+    value = exports.num2dat( num );
+    return MONTHES[value.getMonth()] + " " + value.getDate() + ", " + value.getFullYear()
+        + "  " + value.getHours() + ":" + exports.pad( value.getMinutes() );
+};

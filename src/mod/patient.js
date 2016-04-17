@@ -125,3 +125,8 @@ console.info("[patient] Data.data=...", Data.data());
 exports.onActivateAptList = function() {
     Wdg.getById('apt-list').refresh();
 };
+
+
+exports.onActivateAptView = function( arg ) {
+    Wdg.getById('apt-view').refresh( arg );
+};
