@@ -16,6 +16,13 @@ var Select = function( args ) {
     if( typeof options === 'string' ) {
         try {
             options = JSON.parse( options );
+            if( Array.isArray(options) ) {
+                var tmp = {};
+                options.forEach(function (opt) {
+                    tmp[opt] = opt;
+                });
+                options = tmp;
+            }
         }
         catch( ex ) {
             console.error( "Unable to parse this JSON: ", options );

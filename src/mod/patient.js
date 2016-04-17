@@ -28,7 +28,7 @@ if( Md5.isValid( querystring ) ) {
     Data.load( querystring, function() {
         console.info("[patient] Data.data=...", Data.data);
         var portal = Data.get( '$portal' );
-        if( portal ) {
+        if( portal == 1 ) {
             window.location = "#/book/portal";
         } else {
             window.location = "#/book/user";
@@ -45,6 +45,7 @@ exports.onActivateMain = function() {
 
 exports.onActivatePortal = function() {
     $.get( "#portal-patient-name" ).textContent = Data.parse( "{{dg.firstname}} {{dg.lastname}}" );
+    Wdg.getById( 'portal-apt-list' ).refresh();
 };
 
 
@@ -111,8 +112,16 @@ console.info("[patient] apt=...", apt);
     Data.push( "appointments", apt );
 console.info("[patient] Data.data=...", Data.data());
     APP.waitOn();
-    Data.save(function() {
+    Data.save().then(function() {
         APP.waitOff();
         location.hash = "#/book/portal";
+    }, function(err) {
+        APP.waitOff();
+        console.error( err );
     });
+};
+
+
+exports.onActivateAptList = function() {
+    Wdg.getById('apt-list').refresh();
 };

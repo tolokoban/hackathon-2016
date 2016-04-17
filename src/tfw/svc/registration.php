@@ -77,9 +77,10 @@ function execGet( $args ) {
     $id = $args;
     $sys = new SystemData( 'pri' );
     $data = $sys->loadJSON( $id );
-    if( isset( $data['$portal'] ) ) {
+    $data['$portal'] = 0;
+    if( isset( $data['$patient'] ) ) {
         error_log( "This is for portal" );
-        $id = $data['$portal'];
+        $id = $data['$patient'];
         $data = $sys->loadJSON( $id );
         $data['$portal'] = 1;
     }
@@ -92,6 +93,11 @@ function execSet( $args ) {
     $sys = new SystemData( 'pri' );
     $data = $sys->loadJSON( $id );
     if( !$data ) return -2;
+    if( isset( $data['$patient'] ) ) {
+        error_log( "This is for portal" );
+        $id = $data['$patient'];
+        $data = $sys->loadJSON( $id );
+    }
     foreach( $args as $key => $val ) {
         if( $key != 'id' ) {
             $data[$key] = $val;
@@ -106,7 +112,7 @@ function execTmp( $args ) {
     $id = $args['id'];
     $target = $args['target'];
     $sys = new SystemData( 'pri' );
-    $sys->saveJSON( $id, Array( '$portal' => $target ) );
+    $sys->saveJSON( $id, Array( '$patient' => $target ) );
     return 4;
 }
 

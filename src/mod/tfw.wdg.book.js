@@ -116,6 +116,8 @@ Book.prototype.constructor = Book;
  * @return void
  */
 Book.prototype.show = function(pageID) {
+    var that = this;
+
     var rect;
     var pages = this._pages;
     var page = pages[pageID];
@@ -151,7 +153,9 @@ Book.prototype.show = function(pageID) {
 
     var args = [].slice.call( arguments );
     args[0] = page;
-    activate.apply( this, args );
+    window.setTimeout(function() {
+        activate.apply( that, args );
+    });
 };
 
 

@@ -7,7 +7,6 @@
 html {
     font-family: sans-serif;
     color: #000;
-    font-weight: 300;
     font-size: 2vw;
     background-color: #76b6e1;
     height: 100%;
@@ -39,7 +38,6 @@ body {
     width: 50%;
     height: 100%;
     background: rgba(255,255,255,.8);
-    font-weight: 500;
     font-size: 3vw;
     color: #000;
     overflow: auto;

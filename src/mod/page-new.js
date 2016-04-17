@@ -11,6 +11,7 @@ $.on( btnNewRegistration, function() {
     var email = Wdg.getById( 'new-email' ).val();
     var firstname = Wdg.getById( 'new-firstname' ).val();
     var lastname = Wdg.getById( 'new-lastname' ).val();
+    var gender = Wdg.getById( 'new-gender' ).val();
     Storage.set( 'id', Md5( email ) );
     
     WS.get( 'registration', [
@@ -18,13 +19,14 @@ $.on( btnNewRegistration, function() {
             email: email,
             dg: {
                 firstname: firstname,
-                lastname: lastname
+                lastname: lastname,
+                gender: gender
             }
         }
     ]).then(
         function( ret ) {
             APP.waitOff();
-            window.location = "#/book/registration" + ret;
+            window.location = "?" + Md5( email );
         },
         function( err ) {
             APP.waitOff();
