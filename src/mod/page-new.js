@@ -16,8 +16,10 @@ $.on( btnNewRegistration, function() {
     WS.get( 'registration', [
         'new', {
             email: email,
-            firstname: firstname,
-            lastname: lastname
+            dg: {
+                firstname: firstname,
+                lastname: lastname
+            }
         }
     ]).then(
         function( ret ) {

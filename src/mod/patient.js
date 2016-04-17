@@ -43,11 +43,16 @@ exports.onActivateMain = function() {
 };
 
 
+exports.onActivatePortal = function() {
+    $.get( "#portal-patient-name" ).textContent = Data.parse( "{{dg.firstname}} {{dg.lastname}}" );
+};
+
+
 exports.onActivateUser = function() {
     if( !Data.data() ) {
         window.location = "?" + exports.id;
     } else {
-        $.get( "#user-name" ).textContent = Data.parse( "{{firstname}} {{lastname}}" );
+        $.get( "#user-name" ).textContent = Data.parse( "{{dg.firstname}} {{dg.lastname}}" );
     }
 };
 

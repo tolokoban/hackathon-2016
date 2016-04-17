@@ -2,9 +2,12 @@
 
 <p>Please provide bio information:</p>
 
-<x-widget name="input-text" id="new-email" class="wide">{label: "Email"}</x-widget>
-<x-widget name="input-text" id="new-firstname" class="wide">{label: "First Name"}</x-widget>
-<x-widget name="input-text" id="new-lastname" class="wide">{label: "Last Name"}</x-widget>
+<x-widget name="input-text" id="new-email" class="wide" $label="Email" />
+<x-widget name="input-text" id="new-firstname" class="wide" $label="First Name" />
+<x-widget name="input-text" id="new-lastname" class="wide" $label="Last Name" />
+
+<x-widget name="tp4.select" id="new-gender" class="wide" $label="Gender"
+          $options='{"-":"Not provided","F":"Female","M":"Male"}' />
 
 <blockquote>
 We will ask other data here, like birthday, gender, ...
@@ -16,7 +19,3 @@ We will ask other data here, like birthday, gender, ...
     <a href="#/book/main" class="tp4-button warning">Cancel</a>
     <a id="btnNewRegistration" href="#" class="tp4-button">Create</a>
 </x-row>
-
-
-
-

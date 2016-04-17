@@ -8,6 +8,7 @@ options:
 "use strict";
 var DOM = require("dom");
 var Btn = require("button");
+var Data = require("data2");
 var Widget = require("wdg");
 var Editor = require("tp4.wysiwyg-editor");
 
@@ -29,11 +30,15 @@ var InputDescription = function( options ) {
     var header = DOM.tag( 'header', [options.label] );
     var section = DOM.tag( 'section' );
     var footer = DOM.tag( 'footer', [
-        Btn.Edit().Tap( this.fireEdit.bind( this ) ).element()
+        Btn.create({ caption: "Edit " + options.label }).Tap( this.fireEdit.bind( this ) ).element()
     ]);
     this.append( header, section, footer );
 
     this._section = section;
+    if( typeof this._data === 'string' ) {
+        this._data = options.data;
+        this.val( Data.get( this._data ) );
+    }
 };
 
 // Extension of Widget.
@@ -58,6 +63,9 @@ InputDescription.prototype.val = function( v ) {
     this._section.innerHTML = v;
     if( typeof this._Change === 'function' ) {
         this._Change( this );
+    }
+    if( typeof this._data === 'string' ) {
+        Data.set( this._data, v );
     }
     return this;
 };

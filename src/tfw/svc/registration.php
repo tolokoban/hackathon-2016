@@ -50,6 +50,7 @@ function execNew( $args ) {
     if( !$data ) {
         // This is a real new patient.
         $args['appointments'] = Array();
+        $args['documents'] = Array();
         error_log( "A" );
         $sys->saveJSON( $id, $args );
         error_log( "B" );

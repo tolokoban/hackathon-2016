@@ -17,7 +17,7 @@ exports.log = function( prettyprint) {
 };
 
 exports.get = function( name ) {
-    var data = DATA;
+    var data = DATA || {};
     var path = explodePath( name );
     var item;
     var key;

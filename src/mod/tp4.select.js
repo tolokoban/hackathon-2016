@@ -1,5 +1,6 @@
 "use strict";
 var DOM = require("dom");
+var Data = require("data2");
 var Popup = require("tp4.popup");
 var Widget = require("wdg");
 
@@ -42,6 +43,10 @@ var Select = function( args ) {
     // Activer le onTap.
     DOM.on( this.element(), onTap.bind( this ), true );
     this._onChange = null;
+    if( typeof this._data === 'string' ) {
+        this._data = options.data;
+        this.val( Data.get( this._data ) );
+    }
 };
 
 // Extension of Widget.
@@ -93,6 +98,9 @@ Select.prototype.val = function(v) {
     if (typeof this._options[v] === 'undefined') return this;
     this._val = v;
     this._body.clear( this._options[v] );
+    if( typeof this._data === 'string' ) {
+        Data.set( this._data, v );
+    }
     return this;
 };
 

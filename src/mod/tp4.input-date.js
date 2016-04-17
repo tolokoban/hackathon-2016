@@ -1,6 +1,7 @@
 "use strict";
 var Widget = require("wdg");
 var Listeners = require("tfw.listeners");
+var Data = require("data2");
 
 var I = require("input-text").create;
 var D = Widget.div;
@@ -73,6 +74,10 @@ var InputDate = function(opt) {
     });
 
     this.val( opt.date );
+    if( typeof this._data === 'string' ) {
+        this._data = opt.data;
+        this.YMDhms( Data.get( this._data ) );
+    }
 };
 
 // Extension of Widget.
@@ -140,6 +145,9 @@ InputDate.prototype.val = function(v) {
         this.minute( v.getMinutes() );
         this.second( v.getSeconds() );
         this.eventChange.fire( this );
+        if( typeof this._data === 'string' ) {
+            Data.set( this._data, this.YMDhms() );
+        }
         return this;
     }    
 };
