@@ -1,31 +1,13 @@
 <h1 id="user-name"></h1>
 
 <div id="user-container">
-    <x-template name="user.wait">
-        <x-widget name="tp4.wait" $caption="Loading..." $color="#9cd" />
-    </x-template>
-    <x-template name="user.data">
-        <x-row dir="H" fullwidth>
-            <img $tpl="img" width="128" height="128"/>
-            <p>
-                <a href="#/book/user-edit" class="wide tp4-button">Edit your bio</a>
-                <a href="#/book/event" class="wide tp4-button">New Event</a>
-                <a href="#/book/registration" class="wide tp4-button">Registration</a>
-            </p>
-        </x-row>
-        <hr/>
-        <div $tpl="planning" />
-        <button id="random-hint" class="tp4-button green"><i>Random hint... (this button does not exist)</i></button>
-    </x-template>
-    <x-template name="user.visit">
-        <li>
-            <p><em $tpl="visitDate"></em>: &nbsp;<a $tpl="visitName"></a>.</p>
-        </li>
-    </x-template>
-</div>
+    <x-widget name="button" $caption="My apointments" />
+    <x-widget name="button" $caption="My personal data" />
+    <x-widget name="button" $caption="My documents" />
+    <hr/>
 
-<hr/>
-<p>Here is your QRCode. Just flash it to get your <b>wallet</b> on your phone or tablet.</p>
-<center>
-    <x-widget name="qrcode" id="qrcode2"></x-widget>
-</center>
+    <center>
+        <x-widget name="input-text" id="doctor-email" $label="Doctor email" $autofocus />
+        <x-widget name="button" $action="onPortalOpen" $caption="Give him/her access to my data" />
+    </center>
+</div>

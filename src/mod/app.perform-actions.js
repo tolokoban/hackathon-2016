@@ -10,7 +10,7 @@ var Actions = require("actions");
 var InputBool = require("input-boolean");
 var InputText = require("input-text");
 var InputFile = require("input-file");
-var InputDate = require("input-date");
+//var InputDate = require("input-date");
 var InputSelect = require("input-select");
 
 
@@ -121,9 +121,11 @@ var actions = {
     "input-file": function( args ) {
         return InputFile( args );
     },
+/*
     "input-date": function( args ) {
         return InputDate( args );
     },
+*/
     row: function( args ) {
         var tbl = $.div( 'tbl' );
         if( !Array.isArray( args ) ) args = [args];

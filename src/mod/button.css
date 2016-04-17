@@ -1,3 +1,4 @@
+button.tp4-button,
 a.tp4-button {
     position: relative;
     display: inline-block;
@@ -9,7 +10,7 @@ a.tp4-button {
     border-radius: 1em;
     text-shadow: none;
     cursor: pointer;
-    margin: 1px 2px;
+    margin: 8px 2px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -19,12 +20,17 @@ a.tp4-button {
     transform: translate(0,0);
     transition: all .2s;
     text-align: center;
+    font-weight: 300;
+    border: none;
 }
 
+button.tp4-button.wide,
 a.tp4-button.wide {
     display: block;
+    width: 100%;
 }
 
+button.tp4-button.small,
 a.tp4-button.small {
     font-size: 70%;
     padding: 0 .5em;
@@ -33,16 +39,16 @@ a.tp4-button.small {
     min-width: 2em;
 }
 
+button.tp4-button.press,
 a.tp4-button.press {
     box-shadow: 0px 0px rgba(127,127,127,.5);
     transform: translate(2px,2px);
     transition: all .2s;
 }
 
-a.tp4-button[disabled=yes].press {
-    transform: translate(0,0);
-}
 
+button.tp4-button[disabled=yes]:hover,
+button.tp4-button[disabled=yes],
 a.tp4-button[disabled=yes]:hover,
 a.tp4-button[disabled=yes] {
     text-decoration: none;
@@ -54,19 +60,23 @@ a.tp4-button[disabled=yes] {
     font-style: italic;
 }
 
+button.tp4-button.shadow,
 a.tp4-button.shadow {
     background-color: #69A;
 }
 
+button.tp4-button.warning,
 a.tp4-button.warning {
     background-color: #c50;
     color: #fff;
 }
 
+button.tp4-button.green,
 a.tp4-button.green {
     background-color: #9dc;
 }
 
+button.tp4-button.simple,
 a.tp4-button.simple {
     color: #69b;
     border-radius: none;
@@ -76,10 +86,12 @@ a.tp4-button.simple {
     font-size: 100%;
 }
 
+button.tp4-button.simple:hover,
 a.tp4-button.simple:hover {
     text-decoration: underline;
 }
 
+button.tp4-button:focus,
 a.tp4-button:focus {
     text-decoration: underline;
     text-decoration-style: dotted;

@@ -16,6 +16,15 @@ module.exports = function( args ) {
         Data.save();
     });
     var options = args.options;
+    if( typeof options === 'string' ) {
+        try {
+            options = JSON.parse( options );
+        }
+        catch( ex ) {
+            console.error( "Unable to parse this JSON: ", options );
+            console.error( ex );
+        }
+    }
     if( Array.isArray( options ) ) {
         options.forEach(function ( opt ) {
             var option = $.tag( 'option', { value: opt }, [opt] );

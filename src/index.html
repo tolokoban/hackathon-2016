@@ -8,16 +8,25 @@
             <new><x-include src="new.htm"/></new>
             <user scroll data-activate="onActivateUser"><x-include src="user.htm"/></user>
             <user-edit scroll data-activate="onActivateUserEdit"><x-include src="user-edit.htm"/></user-edit>
-            
+
+            <portal-open scroll data-activate="onActivatePortalOpen">
+                <x-include src="portal-open.htm"/>
+            </portal-open>
+            <portal data-activate="onActivatePortal" scroll><x-include src="portal.htm"/></portal>
+            <portal-apt-add scroll>
+                <x-include src="portal-apt-add.htm"/>
+            </portal-apt-add>
+
+
             <event scroll data-activate="onActivateEvent"><x-include src="event.htm"/></event>
             <dentist><x-include src="dentist.htm"/></dentist>
             <dentist-found><x-include src="dentist-found.htm"/></dentist-found>
 
             <registration><x-include src="registration.htm"/></registration>
 
-            <registration-1><x-include src="registration-1.htm"/></registration-1>            
-            <registration1><x-include src="registration1.htm"/></registration1>            
-            <registration2><x-include src="registration2.htm"/></registration2>            
+            <registration-1><x-include src="registration-1.htm"/></registration-1>
+            <registration1><x-include src="registration1.htm"/></registration1>
+            <registration2><x-include src="registration2.htm"/></registration2>
 
             <report><x-include src="report.htm"/></report>
         </x-book>
@@ -27,6 +36,7 @@
         <x-widget name="tp4.wait" $size="128"/>
     </div>
 
+    <!-- Templates -->
     <x-template name="hint">
         <div class="hint">
             <div class="nurse-question">
@@ -35,5 +45,8 @@
             <div $tpl="answers" />
         </div>
     </x-template>
-</x-html>
 
+    <x-template name="user.wait">
+        <x-widget name="tp4.wait" $caption="Loading..." $color="#9cd" />
+    </x-template>
+</x-html>

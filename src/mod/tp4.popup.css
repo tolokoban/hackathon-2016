@@ -1,0 +1,106 @@
+div.tp4-popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 999999;
+    cursor: pointer;
+}
+
+div.tp4-popup .container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 320px;
+    height: 480px;
+    margin-left: -160px;
+    margin-top: -240px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #CD9;
+    cursor: default;
+}
+
+div.tp4-popup.fullscreen .container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    margin: 0;
+}
+
+@media (max-width: 320px) {
+    /* On small screens, take the full screen, */
+    div.tp4-popup .container {
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+}
+@media (max-height: 480px) {
+    /* On small screens, take the full screen, */
+    div.tp4-popup .container {
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+}
+
+div.tp4-popup .header {
+    position: absolute;
+    left: 32px;
+    top: 0;
+    right: 32px;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #000;
+    font-weight: bold;
+}
+
+div.tp4-popup > .container > .btnExpand,
+div.tp4-popup > .container > .btnClose {
+    position: absolute;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    cursor: pointer;
+}
+
+div.tp4-popup > .container > .btnExpand {
+    left: 0;
+}
+
+div.tp4-popup > .container > .btnClose {
+    right: 0;
+}
+
+div.tp4-popup .body {
+    position: absolute;
+    left: 0;
+    top: 32px;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    color: #000;
+    padding: .5em;
+    overflow: auto;
+    border-radius: 8px 8px 0 0;
+}

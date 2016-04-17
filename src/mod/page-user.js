@@ -9,7 +9,7 @@ var Gravatar = require("wdg.gravatar");
 var hintNumber = 0;
 var hintContainer;
 
-
+/*
 exports.activate = function( id ) {
     var container = document.getElementById( 'user-container' );
     $.clear( container );
@@ -32,14 +32,8 @@ console.info("[page-user] QRCode 2, id=...", id);
             $.clear( container );
             var children = Tpl.appendTo( "user.data", container );
             children.img.src = Gravatar.url( id, 128 );
-            function showHint() {
-                var p = $.tag( 'p' );
-                children.planning.appendChild( p );
-                HintManager.appendTo( 'reminder' + hintNumber, p );
-                hintNumber = (hintNumber + 1) % 4;
-            }
-
-            $.on( $.get( '#random-hint' ), showHint );
         }
     );
 };
+}
+*/

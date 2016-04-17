@@ -7,7 +7,7 @@ options:
  **********************************************************************/
 "use strict";
 var DOM = require("dom");
-var Btn = require("tp4.button");
+var Btn = require("button");
 var Widget = require("wdg");
 var Editor = require("tp4.wysiwyg-editor");
 
