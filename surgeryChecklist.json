@@ -29,7 +29,11 @@
     ['texarea', {text:'Country', P: true, D: false}],
     ['texarea', {text:'Home Phone', P: true, D: false}],
     ['texarea', {text:'Office Phone', P: true, D: false}],
-    ['texarea', {text:'Mobile Phone', P: true, D: false}]
+    ['texarea', {text:'Mobile Phone', P: true, D: false}],
+    ['heading', {text:'Insurance', level:'4'}],
+    ['texarea', {text:'Health Insurance Company', P: true, D: false}],
+    ['texarea', {text:'Health Insurance Card Number', P: true, D: false}],
+    ['texarea', {text:'Insurance Policy Authorisation', P: true, D: false}]
     ]}
   ],
   ['button', {text:'Physiotherapy Information', child: [
