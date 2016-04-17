@@ -1,5 +1,5 @@
 var $ = require("dom");
-var HintManager = require("hint-manager");
+//var HintManager = require("hint-manager");
 
 exports.activate = function() {
     var container = $.get( '#event' );

@@ -1,18 +1,39 @@
-<x-html app="app">
-    <x-dynamic-module src="actions" name="actions" />
+<x-html app="patient">
+    <x-central-box id="x-central-box" width="600" height="800" cols="20">
+        <x-book hash="book" scroll>
+            <main scroll data-activate="onActivateMain"><x-include src="main.htm"/></main>
+            <lockscreen><x-include src="lockscreen.htm"/></lockscreen>
+            <how-to-flash><x-include src="how-to-flash.htm"/></how-to-flash>
+            <lost><x-include src="lost.htm"/></lost>
+            <new><x-include src="new.htm"/></new>
+            <user scroll data-activate="onActivateUser"><x-include src="user.htm"/></user>
+            <user-edit scroll data-activate="onActivateUserEdit"><x-include src="user-edit.htm"/></user-edit>
+            
+            <event scroll data-activate="onActivateEvent"><x-include src="event.htm"/></event>
+            <dentist><x-include src="dentist.htm"/></dentist>
+            <dentist-found><x-include src="dentist-found.htm"/></dentist-found>
 
-    <a class="header" href="#main" id="HEADER">Open Hackathon 2016 - Team 3</a>
-    <div id="DEMO">Hackathon 2016</div>
-    <div id="APP">
-        <div id="APP-BODY">pHM&trade;</div>
-        <div id="CLOSE"></div>
+            <registration><x-include src="registration.htm"/></registration>
+
+            <registration-1><x-include src="registration-1.htm"/></registration-1>            
+            <registration1><x-include src="registration1.htm"/></registration1>            
+            <registration2><x-include src="registration2.htm"/></registration2>            
+
+            <report><x-include src="report.htm"/></report>
+        </x-book>
+    </x-central-box>
+
+    <div id="wait">
+        <x-widget name="tp4.wait" $size="128"/>
     </div>
 
-    <x-template name="nurse">
+    <x-template name="hint">
         <div class="hint">
             <div class="nurse-question">
-                <div $tpl="text" />
+                <div $tpl="question" />
             </div>
+            <div $tpl="answers" />
         </div>
     </x-template>
 </x-html>
+

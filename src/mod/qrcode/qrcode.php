@@ -11,7 +11,7 @@ foreach ($_GET as $key => $val) {
     $page = $val;
   }
 }
-$url = 'http://tolokoban.org/hackathon/' . "$page?$id";
+$url = 'http://' . $_SERVERS['HTTP_HOST'] . '/' . "$page?$id";
 
 QRcode::png($url);
 ?>

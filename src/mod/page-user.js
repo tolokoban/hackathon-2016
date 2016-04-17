@@ -2,8 +2,9 @@ var $ = require("dom");
 var WS = require("tfw.web-service");
 var Tpl = require("x-template");
 var Wdg = require("x-widget");
+var Data = require("data2");
 var Gravatar = require("wdg.gravatar");
-var HintManager = require("hint-manager");
+//var HintManager = require("hint-manager");
 
 var hintNumber = 0;
 var hintContainer;
@@ -20,7 +21,7 @@ console.info("[page-user] QRCode 2, id=...", id);
     $.get( '#user-name' ).textContent = "Unpacking your data...";
     WS.get( 'registration', ['get', id] ).then(
         function( data ) {
-            APP.data = data;
+            Data.data = data;
             console.info("[page-user] id=...", id);
             console.info("[page-user] data=...", data);
             if( !data ) {
