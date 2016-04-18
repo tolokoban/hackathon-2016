@@ -1,4 +1,4 @@
-div.pack-item {
+body div.pack-item {
     margin: 1em;
     border-radius: 16px;
     background: #cd9;
@@ -8,12 +8,16 @@ div.pack-item {
     height: 32px;
 }
 
-div.pack-item.show {
+body.portal div.pack-item {
+    background: #9cd;
+}
+
+body div.pack-item.show {
     transition: height .3s;
     height: 320px;
 }
 
-div.pack-item > h1 {
+body div.pack-item > h1 {
     margin: 0;
     background: rgba(0,0,0,.5);
     color: #fff;
@@ -31,17 +35,17 @@ div.pack-item > h1 {
     text-align: left;
 }
 
-div.pack-item.show > h1 {
+body div.pack-item.show > h1 {
     background-image:    url(app/minus.png);
 }
 
-div.pack-item > div.more {
+body div.pack-item > div.more {
     display: block;
     margin: 0;
     padding: 16px;
 }
 
-div.bool-body {
+body div.bool-body {
     margin-left: 1rem;
     margin-bottom: 1rem;
 }
