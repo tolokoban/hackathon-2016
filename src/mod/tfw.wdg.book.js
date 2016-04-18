@@ -94,6 +94,10 @@ var Book = function(book, hashPrefix) {
             var hashes = Hash.hash().split(';');
             hashes.forEach(function (hash) {
                 hash = hash.trim();
+                if( hash.substr(0, 9) == '/refresh/' ) {
+                    window.location.hash = "#" + hash.substr( 8 );
+                    return;
+                }
                 var page;
                 if (hash.substr(0, hashPrefix.length + 2) == '/' + hashPrefix + '/') {
                     page = hash.substr(hashPrefix.length + 2).trim().split( '/' );

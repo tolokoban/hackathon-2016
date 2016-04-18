@@ -1,7 +1,10 @@
 <h1>Confirm an appointment</h1>
 
-<x-widget name="input-text" $label="Your name" id="apt-add-name" />
-<x-widget name="input-text" $label="Speciality" id="apt-add-specialist" />
+<x-row dir="H" fullwidth>
+    <x-widget name="input-text" $label="Your name" id="apt-add-name" />
+    <x-widget name="tp4.select" $label="Speciality" id="apt-add-speciality"
+              $options='["Radiology","Orthopedics","Dermatology","Gynaecology","Paediatric","Neurology"]' />
+</x-row>
 
 <x-row dir="H" fullwidth>
     <x-widget name="tp4.select" $label="Type" id="apt-add-type"
