@@ -29,6 +29,11 @@ body {
     overflow: hidden;
 }
 
+body.portal {
+    background-color: #0a0b0d;
+    background-image:    url(app/background2.png);
+}
+
 body.story #DEMO,
 body.demo #DEMO {
     opacity: 1;

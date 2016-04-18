@@ -27,7 +27,7 @@ var W = require("tp4.wait").create;
  */
 var Button = function(opts) {
     var that = this;
-    Widget.call(this, {tag: "a"});
+    Widget.call(this, {tag: "button"});
     this.addClass("tp4-button").attr('href', '#');
 
     var t = typeof opts;
@@ -59,7 +59,9 @@ var Button = function(opts) {
         opts.href = href;
     }
     if (typeof opts.href === 'string') {
-        that.attr("href", opts.href);
+        this.Tap( function() {
+            window.location = opts.href;
+        });
     }
     if (typeof opts.target === 'string') {
         that.attr("target", opts.target);

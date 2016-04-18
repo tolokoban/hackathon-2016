@@ -5,6 +5,7 @@ div.tp4-select {
     font-family: sans-serif;
     background-color: #468;
     border-radius: 12px;
+    width: auto;
 }
 
 div.tp4-select > div {

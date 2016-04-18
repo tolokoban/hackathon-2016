@@ -17,7 +17,7 @@ var InputDate = function(opt) {
 
     Widget.call(this);
     this.addClass("tp4-input-date");
-
+    this.css( "width", "auto" );
     if (typeof opt !== 'object') opt = {};
     if (typeof opt === 'undefined') opt = {};
     if (typeof opt.show === 'undefined') opt.show = 'DMY hm';

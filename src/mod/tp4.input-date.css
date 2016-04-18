@@ -3,6 +3,7 @@ div.tp4-input-date {
     position: relative;
     padding: 0;
     min-width: 200px;
+    width: auto;
 }
 
 div.tp4-input-date > div {

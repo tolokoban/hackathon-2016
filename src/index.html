@@ -11,6 +11,8 @@
 
             <apt-list data-activate="onActivateAptList" scroll><x-include src="apt-list.htm"/></apt-list>
             <apt-view data-activate="onActivateAptView" scroll><x-include src="apt-view.htm"/></apt-view>
+            <doc-list data-activate="onActivateDocList" scroll><x-include src="doc-list.htm"/></doc-list>
+            <doc-view data-activate="onActivateDocView" scroll><x-include src="doc-view.htm"/></doc-view>
             <portal-open scroll data-activate="onActivatePortalOpen">
                 <x-include src="portal-open.htm"/>
             </portal-open>
@@ -20,6 +22,9 @@
             <portal-apt-add scroll>
                 <x-include src="portal-apt-add.htm"/>
             </portal-apt-add>
+            <portal-doc-add data-activate="onActivateDocAdd" scroll>
+                <x-include src="portal-doc-add.htm"/>
+            </portal-doc-add>
 
         </x-book>
     </x-central-box>

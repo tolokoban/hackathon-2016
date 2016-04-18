@@ -6,6 +6,7 @@ div.boolean {
     background-repeat: no-repeat;
     background-position: right 4px center;
     background-image: url(app/0.png);
+    background-size: .8rem;
     background-color: #fee;
 }
 
