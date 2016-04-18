@@ -84,6 +84,7 @@ module.exports = AptView;
 
 function createCheckList( apt ) {
     var div = D();
+    if( apt.type != "Surgery" ) return div;
     if( typeof apt.checklist === 'undefined' ) apt.checklist = {};
     this.chklst = apt.checklist;
 
