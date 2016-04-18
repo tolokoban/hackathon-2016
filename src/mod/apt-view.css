@@ -40,3 +40,8 @@ div.pack-item > div.more {
     margin: 0;
     padding: 16px;
 }
+
+div.bool-body {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}

@@ -17,11 +17,15 @@ div.tfw-layout-grid > div {
     display: table-row;
 }
 
+div.tfw-layout-grid > div > div:first-child {
+    font-weight: bold;
+}
+
 div.tfw-layout-grid > div > div {
     display: table-cell;
     padding: 2px 4px;
     margin: 0;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
 }
 

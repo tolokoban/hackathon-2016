@@ -101,7 +101,7 @@ var Book = function(book, hashPrefix) {
                 var page;
                 if (hash.substr(0, hashPrefix.length + 2) == '/' + hashPrefix + '/') {
                     page = hash.substr(hashPrefix.length + 2).trim().split( '/' );
-console.info("[tfw.wdg.book] page=...", page);
+                    console.info("[tfw.wdg.book] page=...", page);
                     that.show.apply( that, page );
                 } else {
                     console.log( "Unknown prefix for hash: ", hash );
@@ -132,29 +132,29 @@ Book.prototype.show = function(pageID) {
     var current = this._current;
     var pageIdx = parseInt(page.attr("data-index")) || 0;
     var currentIdx = parseInt(current.attr("data-index")) || 0;
-    if (!page || page == current) return;
-    current.removeClass("transition");
-    current.removeClass("right");
-    current.removeClass("hide");
-    page.removeClass("transition");
-    page.removeClass("right");
-    page.removeClass("hide");
-    if (currentIdx < pageIdx) {
-        page.addClass("right");
-        rect = page.rect();
-        current.addClass("hide");
+    if (page && page != current) {
+        current.removeClass("transition");
+        current.removeClass("right");
+        current.removeClass("hide");
+        page.removeClass("transition");
         page.removeClass("right");
-    } else {
-        page.addClass("hide");
-        rect = page.rect();
-        current.addClass("right");
         page.removeClass("hide");
+        if (currentIdx < pageIdx) {
+            page.addClass("right");
+            rect = page.rect();
+            current.addClass("hide");
+            page.removeClass("right");
+        } else {
+            page.addClass("hide");
+            rect = page.rect();
+            current.addClass("right");
+            page.removeClass("hide");
+        }
+        current.addClass("transition");
+        page.addClass("transition");
+        this._current = page;
+        this._pageID = pageID;
     }
-    current.addClass("transition");
-    page.addClass("transition");
-    this._current = page;
-    this._pageID = pageID;
-
     var args = [].slice.call( arguments );
     args[0] = page;
     window.setTimeout(function() {
@@ -171,9 +171,13 @@ function activate( page, arg1, arg2, arg3 ) {
     var slotName = page.attr( 'data-activate' );
     if( slotName ) {
         var slot = window.APP[slotName];
+        console.info("[tfw.wdg.book] slotName=...", slotName);
+        console.info("[tfw.wdg.book] slot=...", slot);
         if( typeof slot === 'function' ) {
             slot( arg1, arg2, arg3 );
         }
+    } else {
+        console.log("No activate slot.");
     }
     // Fire an event because page has changed.
     this.eventChange.fire( this._pageID, page, arg1, arg2, arg3 );

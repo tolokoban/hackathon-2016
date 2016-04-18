@@ -117,7 +117,7 @@ exports.load = function( id, onLoaded ) {
 
 };
 
-exports.autoupdate = function( id, delay ) {
+exports.refresh = function( id, delay ) {
 // @TODO load data and update it as soon as possible
 };
 
@@ -225,7 +225,7 @@ exports.push = function( name, value ) {
     if( typeof value !== 'object' || Array.isArray( value )) {
         value = { value: value };
     }
-    value.$key = arr.$key++;
+    value.$key = Date.now() + arr.$key++;
     arr.push( value );
     return value.$key;
 };

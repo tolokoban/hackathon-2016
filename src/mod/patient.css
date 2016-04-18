@@ -31,6 +31,7 @@ body {
 
 body.portal {
     background-color: #0a0b0d;
+    background-size:     cover;
     background-image:    url(app/background2.png);
 }
 
@@ -239,6 +240,11 @@ h1 {
     border-radius: 5px 5px 0 0 !important;
 }
 
+body.portal h1 {
+    color: #eee;
+    background: #468;
+}
+
 h2 {
     font-size: .9rem;
     border-top: 1px solid #000;
@@ -272,6 +278,7 @@ div#wait {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,.7);
+    z-index: 9999;
 }
 
 div#wait > div {
@@ -353,15 +360,15 @@ div.nurse-question > div.show {
 
 #dentist-map {
     display: block;
-/*
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-*/
+    /*
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      */
     background-repeat:   no-repeat;
     background-position: 50% 50%;
     background-size:     cover;

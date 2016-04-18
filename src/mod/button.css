@@ -24,6 +24,11 @@ a.tp4-button {
     border: none;
 }
 
+body.portal a.tp4-button,
+body.portal button.tp4-button {
+    background: #6d9;
+}
+
 button.tp4-button.wide,
 a.tp4-button.wide {
     display: block;

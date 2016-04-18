@@ -58,6 +58,7 @@ exports.onActivateMain = function() {
 exports.onActivatePortal = function() {
     $.get( "#portal-patient-name" ).textContent = Data.parse( "{{dg.firstname}} {{dg.lastname}}" );
     Wdg.getById( 'portal-apt-list' ).refresh();
+    Wdg.getById( 'portal-doc-list' ).refresh();
     if( !Data.get( '$portal' ) ) {
         window.location.hash = "#/book/user";
     }
@@ -176,8 +177,20 @@ exports.onActivateDocList = function() {
 };
 
 
+var currentDoc;
 exports.onActivateDocView = function( key ) {
     var doc = Data.get( 'documents' ).find(function(x) {return x.$key == key;});
     $.get( '#doc-view-name' ).textContent = doc.name;
     $.get( '#doc-view-content' ).innerHTML = doc.content;
+    currentDoc = doc;
 };
+
+exports.onDeleteDoc = function() {
+    if( currentDoc ) {
+        Data.removeByKey( 'documents', currentDoc.$key );
+        Data.save();
+        location.hash = "#/book/doc-list";
+    }
+};
+
+

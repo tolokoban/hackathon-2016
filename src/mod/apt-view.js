@@ -59,7 +59,7 @@ AptView.prototype.refresh = function( key ) {
                     Data.removeByKey( "appointments", key );
                     Data.save().then(function() {
                         APP.waitOff();
-                        window.location.hash = "#/book/user";
+                        window.location.hash = "#/book/apt-list";
                     }, function( err ) {
                         console.error( err );
                     });
@@ -108,7 +108,14 @@ function createCheckList( apt ) {
             this.newBool('Guidelines for pre-surgery self-observation', [
                 this.newDesc('Guidelines')
             ]),
-            this.newBool('Drugs and Alergies'),
+            this.newBool('Drugs and Alergies', [
+                this.newBool("Penicillin"),
+                this.newBool("Pollen"),
+                this.newBool("Aspirin"),
+                this.newBool("Paracetamol"),
+                this.newBool("Iodine"),
+                this.newBool("Eggs")
+            ]),
             this.newBool('Pre-surgery drug intake guideline'),
             this.newBool('Previous anaesthesia and surgeries'),
             this.newBool('Case for surgery', [
@@ -143,7 +150,8 @@ function createCheckList( apt ) {
 AptView.prototype.newBool = function( caption, children ) {
     var chklst = this.chklst;
     var div = $.div();
-    var body = $.div({ style: "display: " + (chklst[caption] ? 'block' : 'none') });
+    var body = $.div('bool-body', { style: "display: " + (chklst[caption] ? 'block' : 'none') });
+    $.css( body, {"left-margin": "1em"});
     var bln = new Bln({ 
         text: caption, 
         get: function() {
