@@ -199,19 +199,27 @@ body.app #APP {
 }
 
 
+#LINK {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 12rem;
+    height: 12rem;
+    cursor: pointer;
 
-
-
-
-
-
+    background-repeat:   no-repeat;
+    background-position: left top;
+    background-size:     contain;
+    background-image:    url(app/qrcode.png);
+}
 
 
 
 
 #x-central-box.x-central-box {
     border-radius: 8px;
-    box-shadow: 0 0 2px 0px #000
+    box-shadow: 0 0 2px 0px #000;
+    z-index: 99;
 }
 
 div.tfw-wdg-book > div {
@@ -229,6 +237,11 @@ h1 {
     padding: .2em 1em;
     text-align: center;
     border-radius: 5px 5px 0 0 !important;
+}
+
+h2 {
+    font-size: .9rem;
+    border-top: 1px solid #000;
 }
 
 article {

@@ -1,13 +1,18 @@
 <h1 id="user-name"></h1>
 
 <div id="user-container">
-    <x-widget name="button" $caption="My apointments" $href="#/book/apt-list" />
-    <x-widget name="button" $caption="My personal data" />
-    <x-widget name="button" $caption="My documents" $href="#/book/doc-list" />
+    <x-row dir="H" fullwidth>
+        <x-widget name="button" $caption="My appointments" $href="#/book/apt-list" />
+        <!-- <x-widget name="button" $caption="My personal data" /> -->
+        <x-widget name="button" $caption="My documents" $href="#/book/doc-list" />
+    </x-row>
     <hr/>
 
     <center>
         <x-widget name="input-text" id="doctor-email" $label="Doctor email" $autofocus />
         <x-widget name="button" $action="onPortalOpen" $caption="Give him/her access to my data" />
     </center>
+
+    <hr/>
+    <x-widget id="demographics1" name="demographics" />
 </div>

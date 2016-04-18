@@ -36,11 +36,21 @@ if( Md5.isValid( querystring ) ) {
             window.location = "#/book/user";
         }
     });
+    $.on( $.get( '#LINK' ), function() {
+        exports.waitOn();
+        Data.load( querystring, function() {
+            exports.waitOff();
+            location.hash = "/refresh" + location.hash.substr( 1 );
+        });
+    }); 
 }
 
 exports.onActivateMain = function() {
     var qrcode = Wdg.onWidgetCreation( 'qrcode', function( wdg ) {
         wdg.id = Storage.get( 'id', Md5( "contact@tolokoban.org" ) );
+    });
+    var qrcodeEmpty = Wdg.onWidgetCreation( 'qrcode-empty', function( wdg ) {
+        wdg.id = 'sign-up';
     });
 };
 
@@ -62,6 +72,8 @@ exports.onActivateUser = function() {
         $.get( "#user-name" ).textContent = Data.parse( "{{dg.firstname}} {{dg.lastname}}" );
         if( Data.get( '$portal' ) ) {
             window.location.hash = "#/book/portal";
+        } else {
+            Wdg.getById( "demographics1" ).refresh();
         }
     }
 };

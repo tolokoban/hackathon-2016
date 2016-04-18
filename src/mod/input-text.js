@@ -148,6 +148,8 @@ var Input = function(opts) {
         this.val( Data.get( dataName ) || '' );
         input.addEvent( 'blur' , function() {
             Data.set( dataName, that.val() );
+            Data.save();
+            console.log( "Blur on " + opts.label, that.val() );
         });
     }
 

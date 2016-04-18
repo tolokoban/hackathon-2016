@@ -117,6 +117,11 @@ exports.load = function( id, onLoaded ) {
 
 };
 
+exports.autoupdate = function( id, delay ) {
+// @TODO load data and update it as soon as possible
+};
+
+
 exports.save = function() {
     var data = DATA || {};
     data.id = APP.id;

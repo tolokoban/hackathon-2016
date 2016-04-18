@@ -8,6 +8,7 @@ var Data = require("data2");
 var $ = require("dom");
 var Bln = require("input-boolean");
 var Desc = require("tp4.input-desc");
+var Demographics = require("demographics");
 
 
 /**
@@ -84,12 +85,14 @@ module.exports = AptView;
 
 function createCheckList( apt ) {
     var div = D();
-    if( apt.type != "Surgery" ) return div;
+    if( apt.type != "Surgery" && apt.type != "Anaesthesia" ) return div;
     if( typeof apt.checklist === 'undefined' ) apt.checklist = {};
     this.chklst = apt.checklist;
 
     div.append(
-        this.newGroup('My demographic and instance data'),
+        this.newGroup('My demographic and instance data', [
+            new Demographics()
+        ]),
         this.newGroup("Physiotherapy Information", [
             this.newGroup('Instructions for pre- and post-surgery preparation'),
             this.newGroup('Plan for pre-surgery preparation'),
