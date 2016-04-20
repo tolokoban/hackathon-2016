@@ -52,7 +52,6 @@ error_log( json_encode( $args ) );
                    'name' => 'HUG',
                    'address' => 'Hôpital Universitaire de Genève, Rue Gabrielle-Perret-Gentil 4, 1205 Genève' )
         );
-error_log( "A" );
         $sys->saveJSON( $id, $args );
 error_log( "B" );
         $mail->send( $args['email'], "[OHGOHRT3] New registration",
@@ -93,6 +92,10 @@ function execSet( $args ) {
         }
     }
     $sys->saveJSON( $id, $data );
+    $mail->send( $args['email'], "[uReg] You received an invitation to access patient data",
+               "<p>You can access to the Patient data through this website (click the QRCode, or flash it):</p>"
+               . "<a href='http://tolokoban.org/hackathon/?$id'>"
+               . "<img src='http://tolokoban.org/hackathon/css/qrcode/qrcode.php?id=$id'></a>" );
     return 3;
 }
 

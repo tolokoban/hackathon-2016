@@ -25,7 +25,7 @@ class Mail {
              . "<title>$subject</title></head>\n"
              . "<body class='tp3-mail'>"
              . "<div class='tp3-mail-body'>$msg</div>"
-             . "<hr/><div>The fabulous Team 3!</div>"
+             . "<hr/><div><b>uReg</b></div>"
              . "</body></html>";
 
         echo "<b>To:</b> $to<br/>\n";
