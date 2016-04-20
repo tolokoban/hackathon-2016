@@ -1,0 +1,85 @@
+div.tp4-select {
+    display: inline-table;
+    border-collapse: collapse;
+    cursor: pointer;
+    font-family: sans-serif;
+    background-color: #468;
+    border-radius: 1rem;
+    width: auto;
+}
+
+div.tp4-select > div {
+    display: table-row;
+    margin: 0;
+}
+
+div.tp4-select > div > div {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 1rem;
+    color: #eee;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.tp4-select > div > div.tail {
+    border-radius: 0 1rem 0 0;
+}
+
+div.tp4-select > div > div.caption {
+    border-radius: 1rem 0 0 0;
+    padding: 1px 1rem;
+    height: 10px;
+}
+
+div.tp4-select > div > div.body {
+    border-radius: 1rem;
+    height: 24px;
+    color: #000;
+    background-color: #9cd;
+    font-size: 1rem;
+    padding: 0 1rem;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+div.tp4-select > div > div.arrow {
+    background-repeat:   no-repeat;
+    background-position: 50% top;
+    background-size:     auto;
+    background-image:    url(tp4.select/arrow.png);
+    padding: 2px;
+    font-size: 0;
+    width: 16px;
+    border-radius: 0 0 1rem 0;
+}
+
+div.tp4-select-popup {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+div.tp4-select-popup .item {
+    display: block;
+    font-size: 1rem;
+    padding: 4px 1rem;
+    text-align: left;
+    margin: 6px 0;
+    cursor: pointer;
+    color: #000;
+}
+
+div.tp4-select-popup .item.selected:hover,
+div.tp4-select-popup .item.selected {
+    box-shadow: 0 0 0 1px #000;
+    background-color: #ddd;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #777;
+    cursor: default;
+}
+
+
+div.tp4-select-popup .item:hover {
+    background-color: #ade;
+}

@@ -1,40 +1,58 @@
 /**********************************************************************
  require( 'app.perform-actions' )
  -----------------------------------------------------------------------
- 
+
  **********************************************************************/
 var $ = require("dom");
-var Data = require('data');
 var Tpl = require("x-template");
+var Data = require('data');
+var Actions = require("actions");
 var InputBool = require("input-boolean");
 var InputText = require("input-text");
 var InputFile = require("input-file");
-var InputDate = require("input-date");
+//var InputDate = require("input-date");
+var InputSelect = require("input-select");
 
 
 module.exports = function( children ) {
     var body = $.div();
 
-    children.forEach(function ( child, idx ) {
-        if( !Array.isArray( child ) ) {
-            console.error( "Element #" + idx + " should be an array!" );
-            console.info("[app.perform-actions] child=...", child);
-            console.info("[app.perform-actions] children=...", children);
+    try {
+        if( typeof children === 'undefined' ) {
+            throw( "children is undefined! But it must be an Array." );
         }
-        var actionID = child[0];
-        var action = actions[actionID];
-        if( action ) {
-            var element = action.apply( body, child.slice( 1 ) );
-            if( typeof element === 'string' ) {
-                location.hash = '#' + element;
-                return;
+        children.forEach(function ( child, idx ) {
+            try {
+                if( !Array.isArray( child ) ) {
+                    throw( "Element #" + idx + " should be an array!" );
+                }
+                var actionID = child[0];
+                var action = actions[actionID];
+                if( action ) {
+                    var element = action.apply( body, child.slice( 1 ) );
+                    if( typeof element === 'string' ) {
+                        location.hash = '#' + element;
+                        return;
+                    }
+                    if( element ) body.appendChild( element );
+                } else {
+                    throw "Unknonw type `" + actionID + "`!";
+                }
             }
-            if( element ) body.appendChild( element );
-        } else {
-            throw "Unknonw type `" + actionID + "`!";
+            catch( ex ) {
+                console.error( "Exception: ", ex );
+                console.error( "Child #" + idx, child );
+                throw( null );
+            }
+        }, this);
+    }
+    catch( ex ) {
+        if( ex !== null ) {
+            console.error( "Exception: ", ex );
         }
-    });
-
+        console.error( "Error in: ", children );
+        throw( ex );
+    }
     return body;
 };
 
@@ -46,10 +64,21 @@ var actions = {
         return div;
     },
     button: function( args ) {
-        var btn = $.tag( 'a', 'button' );
+        var btn = $.tag( 'a', args.style || 'button' );
+        var context = {};
+        if( args.freeze ) {
+            if( !Array.isArray( args.freeze ) ) {
+                args.freeze = [args.freeze];
+            }
+            args.freeze.forEach(function ( name ) {
+                context[name] = Data.get( name );
+            });
+
+        }
         $.on( btn, function() {
-            var target = parse( args.action );
+            var target = parse( args.action, context );
             if( typeof target === 'string' && target.length > 0 ) {
+                console.log( "GOTO: " + target );
                 location.hash = "#" + target;
             }
         });
@@ -65,6 +94,9 @@ var actions = {
     reset: function( args ) {
         Data.reset();
         var key, val;
+        if( typeof args === 'string' ) {
+            args = Actions[args];
+        }
         for( key in args ) {
             val = args[key];
             Data.set( key, val );
@@ -74,7 +106,7 @@ var actions = {
         var key, val;
         for( key in args ) {
             val = args[key];
-            Data.set( key, val );
+            Data.set( key, parse( val ) );
         }
     },
     "input-bool": function( args ) {
@@ -83,17 +115,33 @@ var actions = {
     "input-text": function( args ) {
         return InputText( args );
     },
+    "input-select": function( args ) {
+        return InputSelect( args );
+    },
     "input-file": function( args ) {
         return InputFile( args );
     },
+/*
     "input-date": function( args ) {
         return InputDate( args );
+    },
+*/
+    row: function( args ) {
+        var tbl = $.div( 'tbl' );
+        if( !Array.isArray( args ) ) args = [args];
+        args.forEach(function ( arg ) {
+            var body = module.exports( [arg] );
+            $.add( tbl, $.div([ body ], {
+                style: "width:" + (100 / args.length) + "%"
+            }));            
+        });
+        return tbl;
     },
     loop: function( args, children ) {
         var list = parse( args.list );
         var item = parse( args.item );
         var sort = parse( args.sort );
-        
+
         var arr = Data.get( list );
         if( !Array.isArray( arr ) ) arr = [arr];
 
@@ -129,35 +177,6 @@ var actions = {
 };
 
 
-function parse( input ) {
-    if( Array.isArray( input ) ) {
-        var i, item, result;
-        for (i = 0 ; i < input.length ; i++) {
-            item = input[i];
-            result = parse( item );
-            if( typeof result !== 'undefined' && result !== 'null' ) return result;
-        }
-    }
-    else if( typeof input === 'function' ) {
-        return parse( input.call( Data ) );
-    }
-    else if( typeof input === 'string' ) {
-        var cursor = 0;
-        var posStart;
-        var posEnd;
-        var output = '';
-        while( true ) {
-            posStart = input.indexOf( '{{', cursor );
-            if( posStart == -1 ) break;
-            output += input.substr( cursor, posStart - cursor );
-            cursor = posStart + 2;
-            posEnd = input.indexOf( '}}', cursor );
-            if( posEnd == -1 ) break;
-            output += Data.get( input.substr( cursor, posEnd - cursor ).trim() );
-            cursor = posEnd + 2;
-        }
-        return output + input.substr( cursor );
-    }
-
-    return undefined;
+function parse( input, context ) {
+    return Data.parse( input, context );
 }

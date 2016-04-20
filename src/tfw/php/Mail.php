@@ -6,6 +6,8 @@ class Mail {
                    $cc="",
                    $bcc="",
                    $from="OHGOHRT3 <contact@tolokoban.org>" ) {
+        return 1;
+
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         $headers .= "To: $to\r\n";

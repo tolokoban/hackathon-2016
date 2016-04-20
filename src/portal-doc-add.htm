@@ -1,0 +1,9 @@
+<h1>Add a document</h1>
+
+<x-widget id="new-doc-name" name="input-text" $label="Name" />
+<x-widget id="new-doc-content" name="tp4.input-desc" $label="Content" />
+
+<x-row fullwidth dir="H">
+    <x-widget name="button" $caption="Cancel" $href="#/book/portal"/>
+    <x-widget name="button" $caption="Send it" $action="onAddDoc"/>
+</x-row>

@@ -1,0 +1,24 @@
+<h1>Medical Portal</h1>
+
+<div class="warning">You have a time limited access to the medical data of <b id="portal-patient-name">XXX</b>.</div>
+
+<hr/>
+
+<center>
+    <x-widget name="button" $caption="Confirm appointment" $href="#/book/portal-apt-add"/>
+    <x-widget name="button" $caption="Send Prescription, results, ..." $href="#/book/portal-doc-add"/>
+</center>
+
+<fieldset>
+    <legend>Patient's appointments</legend>
+    <x-widget id="portal-apt-list" name="apt-list" />
+</fieldset>
+
+
+<fieldset>
+    <legend>Patient's documents</legend>
+    <x-widget id="portal-doc-list" name="doc-list" />
+</fieldset>
+
+
+

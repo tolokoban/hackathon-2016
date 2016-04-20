@@ -1,18 +1,51 @@
-<x-html app="app">
-    <x-dynamic-module src="actions" name="actions" />
+<x-html app="patient">
+    <div id="LINK" title="Click to refresh data"></div>
 
-    <a class="header" href="#main">Open Hackathon 2016 - Team 3</a>
-    <div id="DEMO">Hackathon 2016</div>
-    <div id="APP">
-        <div id="APP-BODY">pHM&trade;</div>
+    <x-central-box id="x-central-box" width="600" height="800" cols="20">
+        <x-book hash="book" scroll>
+            <main scroll data-activate="onActivateMain"><x-include src="main.htm"/></main>
+            <!-- The Patient side -->
+            <how-to-flash><x-include src="how-to-flash.htm"/></how-to-flash>
+            <lost><x-include src="lost.htm"/></lost>
+            <new><x-include src="new.htm"/></new>
+            <user scroll data-activate="onActivateUser"><x-include src="user.htm"/></user>
+            <user-edit scroll data-activate="onActivateUserEdit"><x-include src="user-edit.htm"/></user-edit>
+
+            <apt-list data-activate="onActivateAptList" scroll><x-include src="apt-list.htm"/></apt-list>
+            <apt-view data-activate="onActivateAptView" scroll><x-include src="apt-view.htm"/></apt-view>
+            <doc-list data-activate="onActivateDocList" scroll><x-include src="doc-list.htm"/></doc-list>
+            <doc-view data-activate="onActivateDocView" scroll><x-include src="doc-view.htm"/></doc-view>
+            <portal-open scroll data-activate="onActivatePortalOpen">
+                <x-include src="portal-open.htm"/>
+            </portal-open>
+
+            <!-- The Doctor side -->
+            <portal data-activate="onActivatePortal" scroll><x-include src="portal.htm"/></portal>
+            <portal-apt-add scroll>
+                <x-include src="portal-apt-add.htm"/>
+            </portal-apt-add>
+            <portal-doc-add data-activate="onActivateDocAdd" scroll>
+                <x-include src="portal-doc-add.htm"/>
+            </portal-doc-add>
+
+        </x-book>
+    </x-central-box>
+
+    <div id="wait">
+        <x-widget name="tp4.wait" $size="128"/>
     </div>
 
-    <x-template name="nurse">
+    <!-- Templates -->
+    <x-template name="hint">
         <div class="hint">
             <div class="nurse-question">
-                <div $tpl="text" />
+                <div $tpl="question" />
             </div>
+            <div $tpl="answers" />
         </div>
     </x-template>
-</x-html>
 
+    <x-template name="user.wait">
+        <x-widget name="tp4.wait" $caption="Loading..." $color="#9cd" />
+    </x-template>
+</x-html>

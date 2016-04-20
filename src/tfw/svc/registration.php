@@ -15,6 +15,7 @@ $ROLE = "";
 * 1: New registration. 
 * 2: Already registred.
 * 3: Set successfull.
+ * 4: Tmp successfull.
 
  ****************************************/
 
@@ -31,6 +32,10 @@ function execService( $inputs ) {
     if( $svc == 'set' ) {
         return execSet( $args );
     }
+    if( $svc == 'tmp' ) {
+        // Medical Portal.
+        return execTmp( $args );
+    }
     return -1;
 }
 
@@ -44,14 +49,9 @@ error_log( json_encode( $args ) );
     $data = $sys->loadJSON( $id );
     if( !$data ) {
         // This is a real new patient.
-        $args['planning'] = Array(
-            Array( 'date' => '2016-04-11',
-                   'name' => 'X-Ray-SA',
-                   'address' => 'X-Ray SA, Promenade des Artisans 24, 1217 Meyrin' ),
-            Array( 'date' => '2016-04-15',
-                   'name' => 'HUG',
-                   'address' => 'Hôpital Universitaire de Genève, Rue Gabrielle-Perret-Gentil 4, 1205 Genève' )
-        );
+        $args['appointments'] = Array();
+        $args['documents'] = Array();
+error_log( "A" );
         $sys->saveJSON( $id, $args );
 error_log( "B" );
         $mail->send( $args['email'], "[OHGOHRT3] New registration",
@@ -77,6 +77,13 @@ function execGet( $args ) {
     $id = $args;
     $sys = new SystemData( 'pri' );
     $data = $sys->loadJSON( $id );
+    $data['$portal'] = 0;
+    if( isset( $data['$patient'] ) ) {
+        error_log( "This is for portal" );
+        $id = $data['$patient'];
+        $data = $sys->loadJSON( $id );
+        $data['$portal'] = 1;
+    }
     return $data;
 }
 
@@ -86,17 +93,27 @@ function execSet( $args ) {
     $sys = new SystemData( 'pri' );
     $data = $sys->loadJSON( $id );
     if( !$data ) return -2;
+    if( isset( $data['$patient'] ) ) {
+        error_log( "This is for portal" );
+        $id = $data['$patient'];
+        $data = $sys->loadJSON( $id );
+    }
     foreach( $args as $key => $val ) {
         if( $key != 'id' ) {
             $data[$key] = $val;
         }
     }
     $sys->saveJSON( $id, $data );
-    $mail->send( $args['email'], "[uReg] You received an invitation to access patient data",
-               "<p>You can access to the Patient data through this website (click the QRCode, or flash it):</p>"
-               . "<a href='http://tolokoban.org/hackathon/?$id'>"
-               . "<img src='http://tolokoban.org/hackathon/css/qrcode/qrcode.php?id=$id'></a>" );
     return 3;
+}
+
+
+function execTmp( $args ) {
+    $id = $args['id'];
+    $target = $args['target'];
+    $sys = new SystemData( 'pri' );
+    $sys->saveJSON( $id, Array( '$patient' => $target ) );
+    return 4;
 }
 
 ?>

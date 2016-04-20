@@ -1,0 +1,51 @@
+body div.pack-item {
+    margin: 1em;
+    border-radius: 16px;
+    background: #cd9;
+    border: 1px solid #000;
+    overflow: hidden;
+    transition: height .3s;
+    height: 32px;
+}
+
+body.portal div.pack-item {
+    background: #9cd;
+}
+
+body div.pack-item.show {
+    transition: height .3s;
+    height: 320px;
+}
+
+body div.pack-item > h1 {
+    margin: 0;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    height: 32px;
+    line-height: 32px;
+    font-weight: 300;
+    padding: 0 36px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: 8px 50%;
+    background-image: url(app/plus.png);
+    border-radius: 16px;
+    font-size: 1rem;
+    font-variant: small-caps;
+    text-align: left;
+}
+
+body div.pack-item.show > h1 {
+    background-image:    url(app/minus.png);
+}
+
+body div.pack-item > div.more {
+    display: block;
+    margin: 0;
+    padding: 16px;
+}
+
+body div.bool-body {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}

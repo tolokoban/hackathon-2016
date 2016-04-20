@@ -30,9 +30,12 @@ body {
     overflow: hidden;
 }
 
+body.story #DEMO,
 body.demo #DEMO {
     opacity: 1;
     transition: all .3s;
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
 }
 
 a.header {
@@ -58,14 +61,24 @@ a.header {
     bottom: 0;
     width: 50%;
     height: auto;
-    background: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.9);
     font-weight: 500;
-    font-size: 3vw;
+    font-size: 2vw;
     color: #000;
     overflow: auto;
     padding: 1em;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
     transition: all .3s;
 }
+
+body.msg #APP,
+body.app #APP {
+    transition: all .3s;
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
 
 #APP {
     position: absolute;
@@ -79,6 +92,9 @@ a.header {
     background-position: 50% 50%;
     background-size:     100% 100%;
     background-image:    url(app/phone.png);
+    transition: all .3s;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
 }
 
 #APP-BODY {
@@ -128,6 +144,36 @@ a.header {
     font-weight: bold;
     margin: .5em 0;
     box-shadow: 0 0 1px #000;
+    cursor: pointer;
+}
+
+#CLOSE:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+#CLOSE {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 100%;
+    height: 15%;
+    cursor: pointer;
+}
+
+#APP-BODY a.box {
+    display: block;
+    border-radius: 2px;
+    padding: .5em;
+    text-align: left;
+    background: #9CD;
+    color: #000;
+    text-shadow: 1px 1px #fff;
+    text-decoration: none;
+    margin: .5em 0;
+    box-shadow: 0 0 1px #000;
+    cursor: pointer;
 }
 
 
@@ -145,6 +191,7 @@ a.header {
     font-weight: bold;
     margin: .5em 0;
     box-shadow: 0 0 1px #000;
+    cursor: pointer;
 }
 
 
@@ -302,4 +349,19 @@ div.nurse-question > div.show {
     background-position: 50% 50%;
     background-size:     cover;
     background-image:    url(app/map-dentist.jpg);
+}
+
+div.tbl {
+    display: table;
+    width: 100%;
+    margin: .5em 0;
+}
+
+
+div.tbl > div {
+    position: static;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: .2rem;
 }

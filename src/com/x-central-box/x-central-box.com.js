@@ -59,7 +59,7 @@ function checkDefaults( attribs ) {
         width: 240,
         height: 320,
         cols: 25,
-        background: "rgba(255,255,255,.75)",
+        background: "rgba(255,255,255,.9)",
         "border-radius": "5px",
         "box-shadow": "0 0 10px #fff;",
         border: "none"

@@ -1,0 +1,7 @@
+digraph G {
+        main -> new [label="Sign up"];
+        main -> lost [label="Lost password"];
+        main -> user [label="Patient side"];
+        main -> portal [label="Doctor side"];
+        
+}
