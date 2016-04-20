@@ -100,7 +100,7 @@ exports.onPortalOpen = function() {
     var email = Wdg.getById( 'doctor-email' );
     APP.waitOn();
     var newid = Md5( APP.id );
-    WS.get( 'registration', ['tmp', { id: newid, target: APP.id }]).then(
+    WS.get( 'registration', ['tmp', { id: newid, email: email.trim(), target: APP.id }]).then(
         function( ret ) {
             APP.waitOff();
             location.hash = "#/book/portal-open/" + newid;

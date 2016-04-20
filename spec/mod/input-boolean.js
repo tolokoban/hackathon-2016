@@ -1,2 +1,2 @@
-require("input-boolean",function(e,a){var t=require("dom"),s=require("data");a.exports=function(e){var a=t.div("boolean",[e.text]);return s.get(e.data)&&t.addClass(a,"yes"),t.on(a,function(){s.get(e.data)?(t.removeClass(a,"yes"),s.set(e.data,0)):(t.addClass(a,"yes"),s.set(e.data,1)),s.save}),a}});
+require("input-boolean",function(e,n){var o=require("dom"),t=require("data");n.exports=function(e){var n=o.div("boolean",[e.text]),a=e.get||function(){},r=e.set||function(){};return a()&&o.addClass(n,"yes"),o.on(n,function(){a()?(o.removeClass(n,"yes"),r(0)):(o.addClass(n,"yes"),r(1)),t.save()}),n}});
 //# sourceMappingURL=input-boolean.js.map

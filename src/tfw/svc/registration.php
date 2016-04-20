@@ -4,17 +4,17 @@ $ROLE = "";
 
 /****************************************
 
-@example
-["new", {"email":..., "firstname":..., ...}]
-["set", {"id":..., "firstname":..., ...}]
-["get", "3ab1c56fadd51711d1d94cc18aa37d8d"]
+   @example
+   ["new", {"email":..., "firstname":..., ...}]
+   ["set", {"id":..., "firstname":..., ...}]
+   ["get", "3ab1c56fadd51711d1d94cc18aa37d8d"]
 
-@return
-* -1: Unknown service.
-* -2: Unknown ID.
-* 1: New registration. 
-* 2: Already registred.
-* 3: Set successfull.
+   @return
+ * -1: Unknown service.
+ * -2: Unknown ID.
+ * 1: New registration.
+ * 2: Already registred.
+ * 3: Set successfull.
  * 4: Tmp successfull.
 
  ****************************************/
@@ -41,8 +41,8 @@ function execService( $inputs ) {
 
 
 function execNew( $args ) {
-error_log( "NEW" );
-error_log( json_encode( $args ) );
+    error_log( "NEW" );
+    error_log( json_encode( $args ) );
     $id = md5( $args['email'] );
     $sys = new SystemData( 'pri' );
     $mail = new Mail();
@@ -51,15 +51,15 @@ error_log( json_encode( $args ) );
         // This is a real new patient.
         $args['appointments'] = Array();
         $args['documents'] = Array();
-error_log( "A" );
+        error_log( "A" );
         $sys->saveJSON( $id, $args );
-error_log( "B" );
+        error_log( "B" );
         $mail->send( $args['email'], "[OHGOHRT3] New registration",
                      "<p>Dear " . $args['firstname'] . " " . $args['lastname'] . ",</p>"
                    . "<p>You registred successfully and here is your QRCode:</p>"
                    . "<a href='http://tolokoban.org/hackathon/?$id'>"
                    . "<img src='http://tolokoban.org/hackathon/css/qrcode/qrcode.php?id=$id'></a>" );
-error_log( "C" );
+        error_log( "C" );
         return 1;
     } else {
         $mail->send( $args['email'], "[OHGOHRT3] New registration",
@@ -69,7 +69,7 @@ error_log( "C" );
                    . "<img src='http://tolokoban.org/hackathon/css/qrcode/qrcode.php?id=$id'></a>" );
         return 2;
     }
-    
+
 }
 
 
@@ -113,6 +113,12 @@ function execTmp( $args ) {
     $target = $args['target'];
     $sys = new SystemData( 'pri' );
     $sys->saveJSON( $id, Array( '$patient' => $target ) );
+    $mail = new Mail();
+    $mail->send( $args['email'], "[uReg] You received an invitation to access patient data",
+                 "<p>You can access to the Patient data through this website "
+                 . "(click the QRCode, or flash it):</p>"
+               . "<a href='http://tolokoban.org/hackathon/?$id'>"
+               . "<img src='http://tolokoban.org/hackathon/css/qrcode/qrcode.php?id=$id'></a>" );
     return 4;
 }
 
